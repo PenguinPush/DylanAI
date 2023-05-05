@@ -6,5 +6,8 @@ from tkinter import ttk
 # sidebar
 
 root = tk.Tk()
-root.title("Tkinte")
+root.title("Polar")
+root.geometry("750x450")
 
+
+root.mainloop()
