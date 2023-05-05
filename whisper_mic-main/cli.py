@@ -14,11 +14,6 @@ import keyboard
 import mouse
 import time
 
-trigger_word = ["click"]
-
-def trigger_function():
-    print("test")
-
 @click.command()
 @click.option("--model", default="base", help="Model to use", type=click.Choice(["tiny","base", "small","medium","large"]))
 @click.option("--device", default=("cuda" if torch.cuda.is_available() else "cpu"), help="Device to use", type=click.Choice(["cpu","cuda"]))
@@ -43,7 +38,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
                      args=(audio_queue, result_queue, audio_model, english, verbose, save_file)).start()
 
     while True:
-        print(result_queue.get())
+        print(result_queue.get(), file=transcript)
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
@@ -88,8 +83,6 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
             if predicted_text != " .":
                 result_queue.put_nowait(predicted_text)
 
-            if any(substring.lower() in predicted_text.lower() for substring in trigger_word):
-                trigger_function()
         else:
             result_queue.put_nowait(result)
 
@@ -97,6 +90,7 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
             os.remove(audio_data)
 
 if __name__ == "__main__":
+    transcript = open("transcript.txt")
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Please wait. Calibrating microphone...")
