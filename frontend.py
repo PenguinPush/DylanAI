@@ -9,5 +9,9 @@ root = tk.Tk()
 root.title("Polar")
 root.geometry("750x450")
 
+State = False
+
+MenuOpen = PhotoImage(file="sideMenuOpen.png")
+MenuClose = PhotoImage(file="sideMenuClose.png")
 
 root.mainloop()
