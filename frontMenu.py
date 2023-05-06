@@ -2,6 +2,7 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import ctypes
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
@@ -30,7 +31,7 @@ def switch():
     global menuState
     if menuState is True:
         for b in range(301):
-            menuFrame.place(x=-b, y=0)
+            menuFrame.place(x=-b * 10, y=0)
             barTop.update()
 
        
@@ -44,7 +45,7 @@ def switch():
         root.config(bg="#242424")
 
         for b in range(-300, 0):
-            menuFrame.place(x=b, y=0)
+            menuFrame.place(x=b * 10, y=0)
             barTop.update()
 
         menuState = True
@@ -64,7 +65,7 @@ menuFrame.place(x=-300, y=0)
 tk.Label(menuFrame, font="Bahnschrift 15", bg="#817A90", fg="#3C3744", height=2, width=300, padx=20).place(x=0, y=-4)
 
 y = 80
-options = ["Menu", "Dylan", "Help"]
+options = ["MENU", "CONFIG", "HELP"]
 def button(a,x,y,cmd):
 
     def invert_colors(event):
@@ -81,11 +82,8 @@ button(0,35,80,hi())
 button(1,35,190,hi())
 button(2,35,300,hi())
 
-
-menuClose = tk.Button(menuFrame, image=menuCloseImage, bg="#817A90", bd=0, command=switch)
+menuClose = tk.Button(menuFrame, image=menuCloseImage, bg="#817A90", fg="#817A90", activebackground="#817A90", activeforeground="#FFEAEC", bd=0, command=switch)
 menuClose.place(x=250, y=10)
-
-
 
 # MENU CLOSE
 
@@ -93,7 +91,7 @@ label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa H
 label.pack(pady=12, padx=10)
 label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa Heavy", 15))
 label.pack(pady=25, padx=10)
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
+label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa heavy", 70))
 label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("Nexa Heavy", 70))
 label.pack(pady=0, padx=10)
 
