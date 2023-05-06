@@ -30,7 +30,9 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
 
     while True:
         text = result_queue.get()
-        if text != "" or text != " ":
+        if text == "" or text == " ":
+            print()
+        else:
             print("\n" + text)
             categories = categorize(text)
 

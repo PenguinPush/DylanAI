@@ -1,31 +1,18 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-commands = {"typing", "open app", ""}
-default_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother",
-    "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok",
-    "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail",
-    "Pinterest", "LinkedIn", "Amazon", "Slack", "Google Drive", "Dropbox", "Microsoft Word",
-    "iMovie", "Snapchat", "Notion", "Reddit", "Twitch", "Adobe Illustrator", "Skype",
-    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Apple Music", "Google Photos",
-    "Adobe Premiere Pro", "Microsoft Outlook", "Telegram", "VLC Media Player", "Google Translate",
-    "Microsoft OneNote", "Adobe Acrobat", "Google Docs", "Google Sheets", "Google Slides",
-    "Microsoft Edge", "Mozilla Firefox", "Viber", "WeChat", "Microsoft Paint", "Apple Notes"
+commands = {"typing", "open app", "other"}
+default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Manager",
+    "Discord", "Instagram", "Netflix", "Microsoft Excel", "TikTok",
+    "Zoom", "Google Maps", "Twitter", "Gmail",
+    "Pinterest", "LinkedIn", "Amazon", "Google Drive", "Microsoft Word",
+    "Snapchat", "Twitch", "Adobe Illustrator",
+    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Spotify",
+    "Adobe Premiere Pro", "Google Translate", "Google Docs", "Google Sheets", "Google Slides",
+    "Microsoft Edge", "Microsoft Paint"
     ]
 
 def categorize(input, subject_list=default_list):
-
-    if subject_list is None:
-        subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother",
-    "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok",
-    "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail",
-    "Pinterest", "LinkedIn", "Amazon", "Slack", "Google Drive", "Dropbox", "Microsoft Word",
-    "iMovie", "Snapchat", "Notion", "Reddit", "Twitch", "Adobe Illustrator", "Skype",
-    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Apple Music", "Google Photos",
-    "Adobe Premiere Pro", "Microsoft Outlook", "Telegram", "VLC Media Player", "Google Translate",
-    "Microsoft OneNote", "Adobe Acrobat", "Google Docs", "Google Sheets", "Google Slides",
-    "Microsoft Edge", "Mozilla Firefox", "Viber", "WeChat", "Microsoft Paint", "Apple Notes"
-    ]
 
     inputs = [input]
     data_validity = [
@@ -57,17 +44,6 @@ def categorize(input, subject_list=default_list):
         Example("Dylan, order a pizza for dinner tonight.", "not computer related"),
         Example("Dylan, feed the dog before leaving.", "not computer related"),
         Example("Dylan, water the plants in the garden.", "not computer related")
-    ]
-
-    temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother",
-    "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok",
-    "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail",
-    "Pinterest", "LinkedIn", "Amazon", "Slack", "Google Drive", "Dropbox", "Microsoft Word",
-    "iMovie", "Snapchat", "Notion", "Reddit", "Twitch", "Adobe Illustrator", "Skype",
-    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Apple Music", "Google Photos",
-    "Adobe Premiere Pro", "Microsoft Outlook", "Telegram", "VLC Media Player", "Google Translate",
-    "Microsoft OneNote", "Adobe Acrobat", "Google Docs", "Google Sheets", "Google Slides",
-    "Microsoft Edge", "Mozilla Firefox", "Viber", "WeChat", "Microsoft Paint", "Apple Notes"
     ]
 
     data_command = []
@@ -116,17 +92,10 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, restore {subject}", "other"),
             Example(f"Dylan, export {subject}", "other"),
             Example(f"Dylan, import {subject}", "other"),
-            Example(f"Dylan, print {subject}", "other"),
-            Example(f"Dylan, encrypt {subject}", "other"),
-            Example(f"Dylan, decrypt {subject}", "other"),
-            Example(f"Dylan, organize {subject}", "other"),
-            Example(f"Dylan, archive {subject}", "other"),
             Example(f"Dylan, record {subject}", "other"),
             Example(f"Dylan, stream {subject}", "other"),
             Example(f"Dylan, broadcast {subject}", "other"),
             Example(f"Dylan, stop {subject}", "other"),
-            Example(f"Dylan, pause {subject}", "other"),
-            Example(f"Dylan, resume {subject}", "other"),
             Example(f"Dylan, shuffle {subject}", "other"),
             Example(f"Dylan, repeat {subject}", "other"),
             Example(f"Dylan, skip {subject}", "other"),
@@ -165,7 +134,7 @@ def categorize(input, subject_list=default_list):
             Example("Dylan, pet {subject}", "other"),
             Example("Dylan, water {subject}", "other"),
             Example("Dylan, paint {subject}", "other"),
-            Example("Dylan, carve {subject}", "other"),
+            Example("Dylan, carve {subject}", "other")
         ]
 
     validity = co.classify(
