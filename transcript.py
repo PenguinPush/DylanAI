@@ -39,6 +39,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
 
             for key, item in categories.items():
                 read_info(key, item, text)
+                print(f"{key}: {item}")
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
@@ -59,8 +60,10 @@ def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir
             write(Variables.filename, 32000, data)
             audio_queue.put_nowait(audio_data)
 
-            if os.path.exists(f"temp{Variables.i - 10}.wav"):
-                os.remove(f"temp{Variables.i - 10}.wav")
+            try:
+                os.remove(f"temp{Variables.i - 2}.wav")
+            except OSError:
+                pass
 
             Variables.i += 1
             Variables.wav_checked = False

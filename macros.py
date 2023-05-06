@@ -14,11 +14,9 @@ class VariablesMacros:
 
 def read_info(key, item, text):
 
-    #print(f"{key}: {item[0]}")
-
     match key:
         case "validity":
-            if item[1] > confidence_threshold:
+            if item[1] > confidence_threshold / 4:
                if item[0] == "valid command":
                    VariablesMacros.valid = True
                else:
@@ -48,7 +46,16 @@ def read_info(key, item, text):
                         VariablesMacros.valid = False
                         VariablesMacros.command = ""
 
-                if VariablesMacros.valid and VariablesMacros.command == "search":
+                else:
+                    if item[0] != 'invalid command':
+                        print(get_searchable_term(text))
+                        results = search_results(get_searchable_term(text), 3)
+                        for result in results:
+                            print(result['title'])
+                            print(result['formattedUrl'] + '\n')
+
+            else:
+                if item[0] != 'invalid command':
                     print(get_searchable_term(text))
                     results = search_results(get_searchable_term(text), 3)
                     for result in results:
