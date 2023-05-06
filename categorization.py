@@ -2,7 +2,9 @@ import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
 commands = {"typing", "open app", "other"}
-default_list = []
+default_list = ["Chrome", "Youtube", "Google Translate", "File Explorer", "Notepad"]
+default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
+browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list):
 
@@ -58,16 +60,17 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, open {subject} for me", "open"),
             Example(f"Dylan, open {subject}", "open"),
             Example(f"Dylan, please open {subject}", "open"),
-            Example(f"Dylan, open {subject} pleaseplaseplasea", "open"),
+            Example(f"Dylan, open {subject} please", "open"),
             Example(f"Dylan, run {subject}", "open"),
-            Example(f"Dylan, run {subject}", "open"),
+            Example(f"Dylan, launch {subject}", "open"),
             Example(f"Dylan, create a new {subject} tab something", "open"),
-            Example(f"Dylan, can you please open {subject}", "open"),
+            Example(f"Dylan, start {subject}", "open"),
+            Example(f"Dylan, use {subject}", "open"),
 
             Example(f"Dylan, type {subject}", "type"),
             Example(f"Dylan, can you type {subject}", "type"),
             Example(f"Dylan, type {subject}", "type"),
-            Example("Dylan, please type a response in chat", "type"),
+            Example(f"Dylan, please type a response in chat", "type"),
             Example(f"Dylan, message {subject}", "type"),
             Example(f"Dylan, reply to {subject}", "type"),
             Example(f"Dylan, send {subject} a text message", "type"),
