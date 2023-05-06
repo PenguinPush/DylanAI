@@ -10,6 +10,7 @@ import glob
 from scipy.io.wavfile import write
 from categorization import categorize
 from macros import read_info
+from chat import chat
 
 openai.api_key = "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"
 
@@ -35,6 +36,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
         else:
             print("\n" + text)
             categories = categorize(text)
+            chat(text)
 
             for key, item in categories.items():
                 read_info(key, item, text)
