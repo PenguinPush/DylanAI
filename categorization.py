@@ -68,6 +68,9 @@ def categorize(input, subject_list=default_list_dict.keys()):
             Example(f"Dylan, run {subject}", "open"),
             Example(f"Dylan, create a new {subject} tab something", "open"),
             Example(f"Dylan, can you please open {subject}", "open"),
+            Example(f"Dylan, launch {subject} in my desktop", "open"),
+            Example(f"Dylan, start the proccess {subject}", "open"),
+      
 
             Example(f"Dylan, type {subject}", "type"),
             Example(f"Dylan, can you type {subject}", "type"),

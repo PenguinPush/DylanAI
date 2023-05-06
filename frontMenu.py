@@ -12,7 +12,7 @@ color = {"nero": "#252726", "orange": "#FF8700", "darkorange": "#FE6101"}
 root = tk.Tk()
 root.title("DYLAN !!!!")
 root.config(bg="#242424")
-root.geometry("800x600")
+root.geometry("800x700")
 
 barTop = tk.Frame(root, bg="#3C3744", height=50)
 barTop.pack(side="top", fill=tk.X)
@@ -71,7 +71,7 @@ def button(a,x,y,cmd):
         fg = but.cget("fg")
         but.config(background=fg, foreground=bg)
 
-    but = tk.Button(menuFrame, text=options[a], font=("Nexa Heavy", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
+    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
     but.place(x=x, y=y)
     but.bind("<Enter>", invert_colors)
     but.bind("<Leave>", invert_colors)
@@ -88,7 +88,15 @@ menuClose.place(x=250, y=10)
 
 # MENU CLOSE
 
+<<<<<<< HEAD:frontend.py
+label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa Heavy", 70))
+label.pack(pady=12, padx=10)
+label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa Heavy", 15))
+label.pack(pady=25, padx=10)
+label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
+=======
 label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("Nexa Heavy", 70))
+>>>>>>> 33268fc20aa03953db648579dcbf7e5783b6feb4:frontMenu.py
 label.pack(pady=0, padx=10)
 
 
