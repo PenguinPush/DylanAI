@@ -12,7 +12,7 @@ root.geometry("750x450")
 
 State = False
 
-MenuOpen = PhotoImage(file="menu.png")
-MenuClose = PhotoImage(file="close.png")
+MenuOpen = PhotoImage(file="menuOpen.png")
+MenuClose = PhotoImage(file="menuClose.png")
 
 root.mainloop()
