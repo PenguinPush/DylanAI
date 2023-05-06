@@ -79,7 +79,7 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, Google {subject}", "search"),
             Example(f"Dylan, look up {subject}", "search"),
             Example(f"Dylan, check the web for {subject}", "search"),
-            Example(f"Dylan, tell me about {subject}", "search"),
+            Example(f"Dylan, search {subject}", "search"),
 
             Example(f"Dylan, lift {subject}", "other"),
             Example(f"Dylan, throw {subject}", "other"),

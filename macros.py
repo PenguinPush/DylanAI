@@ -27,7 +27,6 @@ def read_info(key, item):
         case "command":
             if item[1] > confidence_threshold:
                 Variables.command = item[0]
-                print(Variables.command)
 
         case "subject":
             if item[1] > confidence_threshold:
