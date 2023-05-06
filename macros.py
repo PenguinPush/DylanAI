@@ -9,7 +9,7 @@ import webbrowser
 confidence_threshold = 0.8
 
 class VariablesMacros:
-    valid = False
+    valid = 0
     command = ""
 
 def read_info(key, item, text):
@@ -17,10 +17,14 @@ def read_info(key, item, text):
     match key:
         case "validity":
             if item[1] > confidence_threshold / 4:
-               if item[0] == "valid command":
-                   VariablesMacros.valid = True
-               else:
-                   VariablesMacros.valid = False
+               match item[0]:
+                   case "valid command":
+                       VariablesMacros.valid = 1
+                   case "not computer related":
+                       VariablesMacros.valid = 2
+                   case "invalid command":
+                       VariablesMacros.valid = 0
+
 
         case "command":
             if item[1] > confidence_threshold:
@@ -35,7 +39,7 @@ def read_info(key, item, text):
                 else:
                     subject_type = "path"
 
-                if VariablesMacros.valid and VariablesMacros.command == "open":
+                if VariablesMacros.valid == 1 and VariablesMacros.command == "open":
                     if subject_type == "path":
                         os.system(item_location)
                         VariablesMacros.valid = False
@@ -47,7 +51,7 @@ def read_info(key, item, text):
                         VariablesMacros.command = ""
 
                 else:
-                    if item[0] != 'invalid command':
+                    if VariablesMacros.valid > 0:
                         print(get_searchable_term(text))
                         results = search_results(get_searchable_term(text), 3)
                         for result in results:
@@ -55,7 +59,7 @@ def read_info(key, item, text):
                             print(result['formattedUrl'] + '\n')
 
             else:
-                if item[0] != 'invalid command':
+                if VariablesMacros.valid > 0:
                     print(get_searchable_term(text))
                     results = search_results(get_searchable_term(text), 3)
                     for result in results:
