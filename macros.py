@@ -1,5 +1,6 @@
 from categorization import default_list
 from categorization import default_list_locations
+from categorization import get_searchable_term
 from searching import search_results
 import os
 import keyboard
@@ -49,6 +50,7 @@ def read_info(key, item):
                         Variables.command = ""
 
                 if Variables.valid and Variables.command == "search":
+                    get_searchable_term()
                     print(search_results(item[0], 3))
 
 
