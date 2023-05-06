@@ -2,10 +2,13 @@ import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
 commands = {"typing", "open app", ""}
+default_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
 
+def categorize(input, subject_list=default_list):
 
-def categorize(input, subject_list):
-
+    if subject_list is None:
+        subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord",
+                        "instagram", "@vickyqchu"]
     inputs = [input]
     data_validity = [
         Example("Dylan, fetch me a water bottle", "not computer related"),
