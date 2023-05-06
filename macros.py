@@ -1,5 +1,5 @@
-from categorization import default_list
-from categorization import default_list_locations
+from categorization import default_list_dict
+from categorization import get_searchable_term
 from searching import search_results
 import os
 import keyboard
@@ -8,48 +8,59 @@ import webbrowser
 
 confidence_threshold = 0.8
 
-class Variables:
+class VariablesMacros:
     valid = False
     command = ""
 
-def read_info(key, item):
-
-    #print(f"{key}: {item[0]}")
+def read_info(key, item, text):
 
     match key:
         case "validity":
-            if item[1] > confidence_threshold:
+            if item[1] > confidence_threshold / 4:
                if item[0] == "valid command":
-                   Variables.valid = True
+                   VariablesMacros.valid = True
                else:
-                   Variables.valid = False
+                   VariablesMacros.valid = False
 
         case "command":
             if item[1] > confidence_threshold:
-                Variables.command = item[0]
+                VariablesMacros.command = item[0]
 
         case "subject":
             if item[1] > confidence_threshold:
-                item_location = default_list_locations[default_list.index(item[0])]
+                item_location = default_list_dict[item[0]]
 
                 if item_location.startswith("http"):
                     subject_type = "url"
                 else:
                     subject_type = "path"
 
-                if Variables.valid and Variables.command == "open":
+                if VariablesMacros.valid and VariablesMacros.command == "open":
                     if subject_type == "path":
                         os.system(item_location)
-                        Variables.valid = False
-                        Variables.command = ""
+                        VariablesMacros.valid = False
+                        VariablesMacros.command = ""
 
                     if subject_type == "url":
                         webbrowser.open(item_location)
-                        Variables.valid = False
-                        Variables.command = ""
+                        VariablesMacros.valid = False
+                        VariablesMacros.command = ""
 
-                if Variables.valid and Variables.command == "search":
-                    search_results(item[0], 3)
+                else:
+                    if item[0] != 'invalid command':
+                        print(get_searchable_term(text))
+                        results = search_results(get_searchable_term(text), 3)
+                        for result in results:
+                            print(result['title'])
+                            print(result['formattedUrl'] + '\n')
+
+            else:
+                if item[0] != 'invalid command':
+                    print(get_searchable_term(text))
+                    results = search_results(get_searchable_term(text), 3)
+                    for result in results:
+                        print(result['title'])
+                        print(result['formattedUrl'] + '\n')
 
 
 

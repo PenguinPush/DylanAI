@@ -71,7 +71,7 @@ def button(a,x,y,cmd):
         fg = but.cget("fg")
         but.config(background=fg, foreground=bg)
 
-    but = tk.Button(menuFrame, text=options[a], font=("Nexa Heavy", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
+    but = tk.Button(menuFrame, text=options[a], font=("nexa heavy", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
     but.place(x=x, y=y)
     but.bind("<Enter>", invert_colors)
     but.bind("<Leave>", invert_colors)
@@ -84,21 +84,15 @@ button(2,35,300,hi())
 menuClose = tk.Button(menuFrame, image=menuCloseImage, bg="#817A90", bd=0, command=switch)
 menuClose.place(x=250, y=10)
 
+#menuclose
 
-
-# MENU CLOSE
-
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("Nexa Heavy", 70))
+label = ctk.CTkLabel(master=frame, text="HELP", text_color="#FFEAEC", font=("nexa bold", 70))
 label.pack(pady=12, padx=10)
-label = ctk.CTkLabel(master=frame, text="FILLER", text_color="#FFEAEC", font=("Nexa Heavy", 15))
-label.pack(pady=25, padx=10)
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
-label.pack(pady=0, padx=10)
 
 
-label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#FFEAEC", font=("nexa bold", 15))
-label.pack(pady=1, padx=10)
+
 
 
 
 root.mainloop()
+

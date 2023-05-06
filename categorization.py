@@ -1,13 +1,19 @@
 import cohere
 from cohere.responses.classify import Example
-co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-commands = {"typing", "open app", "search", "other"}
-default_list = ["Chrome", "Youtube", "Google Translate", "File Explorer", "Notepad"]
-default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
+co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
+
+
+default_list_dict = {
+    "Chrome": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s",
+    "Youtube": "https://youtube.com",
+    "Google Translate": "https://translate.google.com/",
+    "File explorer": "C:\Windows\explorer.exe",
+    "Notepad": "C:\Windows\\notepad.exe"
+}
+
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
-def categorize(input, subject_list=default_list):
-
+def categorize(input, subject_list=default_list_dict.keys()):
     inputs = [input]
     data_validity = [
         Example("Dylan, fetch me a water bottle", "not computer related"),
@@ -60,53 +66,30 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, open {subject} for me", "open"),
             Example(f"Dylan, open {subject}", "open"),
             Example(f"Dylan, please open {subject}", "open"),
-            Example(f"Dylan, open {subject} please", "open"),
+            Example(f"Dylan, open {subject} pleaseplaseplasea", "open"),
             Example(f"Dylan, run {subject}", "open"),
-            Example(f"Dylan, launch {subject}", "open"),
+            Example(f"Dylan, run {subject}", "open"),
             Example(f"Dylan, create a new {subject} tab something", "open"),
-            Example(f"Dylan, start {subject}", "open"),
-            Example(f"Dylan, use {subject}", "open"),
+            Example(f"Dylan, can you please open {subject}", "open"),
 
             Example(f"Dylan, type {subject}", "type"),
             Example(f"Dylan, can you type {subject}", "type"),
             Example(f"Dylan, type {subject}", "type"),
-            Example(f"Dylan, please type a response in chat", "type"),
+            Example("Dylan, please type a response in chat", "type"),
             Example(f"Dylan, message {subject}", "type"),
             Example(f"Dylan, reply to {subject}", "type"),
             Example(f"Dylan, send {subject} a text message", "type"),
             Example(f"Dylan, respond to {subject}", "type"),
 
-            Example(f"Dylan, Google {subject}", "search"),
+            Example(f"Dylan, search for {subject}", "search"),
+            Example(f"Dylan, find mcdonalds locations near me", "search"),
+            Example(f"Dylan, locate {subject}", "search"),
+            Example(f"Dylan, find me a {subject} online", "search"),
+            Example(f"Dylan, look for a {subject}", "search"),
+            Example(f"Dylan, browse for a {subject}", "search"),
+            Example(f"Dylan, browse the web for {subject}", "search"),
             Example(f"Dylan, look up {subject}", "search"),
-            Example(f"Dylan, check the web for {subject}", "search"),
-            Example(f"Dylan, search {subject}", "search"),
-
-            Example(f"Dylan, lift {subject}", "other"),
-            Example(f"Dylan, throw {subject}", "other"),
-            Example(f"Dylan, run with {subject}", "other"),
-            Example(f"Dylan, kick {subject}", "other"),
-            Example(f"Dylan, catch {subject}", "other"),
-            Example(f"Dylan, climb {subject}", "other"),
-            Example(f"Dylan, balance {subject}", "other"),
-            Example(f"Dylan, jump over {subject}", "other"),
-            Example(f"Dylan, swim across {subject}", "other"),
-            Example(f"Dylan, ride {subject}", "other"),
-            Example(f"Dylan, drive {subject}", "other"),
-            Example(f"Dylan, fly {subject}", "other"),
-            Example(f"Dylan, walk on {subject}", "other"),
-            Example(f"Dylan, punch {subject}", "other"),
-            Example(f"Dylan, dance with {subject}", "other"),
-            Example(f"Dylan, exercise with {subject}", "other"),
-            Example(f"Dylan, hug {subject}", "other"),
-            Example(f"Dylan, kiss {subject}", "other"),
-            Example(f"Dylan, high-five {subject}", "other"),
-            Example(f"Dylan, shake hands with {subject}", "other"),
-            Example(f"Dylan, massage {subject}", "other"),
-            Example(f"Dylan, feed {subject}", "other"),
-            Example(f"Dylan, pet {subject}", "other"),
-            Example(f"Dylan, water {subject}", "other"),
-            Example(f"Dylan, paint {subject}", "other"),
-            Example(f"Dylan, carve {subject}", "other")
+            Example(f"Dylan, Google {subject}", "search"),
         ]
 
     validity = co.classify(
@@ -130,6 +113,20 @@ def categorize(input, subject_list=default_list):
             "validity": (validity.classifications[0].prediction, validity.classifications[0].confidence),
             "command": (command.classifications[0].prediction, command.classifications[0].confidence),
             "subject": (subject.classifications[0].prediction, subject.classifications[0].confidence),
+
         }
     )
+
+def get_searchable_term(string):
+    prompt = f'''
+    The following prompt is a user command to DYLAN, an ai system designed to search terms. 
+    You will need to output a concise, searchable term based on the prompt below, removing any mentions of DYLAN, and just making it into search terms:
+    {string}'''
+    response = co.generate(
+        model='command-nightly',
+        prompt=prompt,
+        max_tokens=200,
+        temperature=0)
+    terms = response.generations[0].text
+    return terms
 
