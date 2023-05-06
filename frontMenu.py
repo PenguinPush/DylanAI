@@ -11,6 +11,7 @@ color = {"nero": "#252726", "orange": "#FF8700", "darkorange": "#FE6101"}
 
 root = tk.Tk()
 root.title("DYLAN !!!!")
+root.iconbitmap("bird_white.ico")
 root.config(bg="#242424")
 root.geometry("800x700")
 
@@ -88,15 +89,12 @@ menuClose.place(x=250, y=10)
 
 # MENU CLOSE
 
-<<<<<<< HEAD:frontend.py
 label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa Heavy", 70))
 label.pack(pady=12, padx=10)
 label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa Heavy", 15))
 label.pack(pady=25, padx=10)
 label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
-=======
 label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("Nexa Heavy", 70))
->>>>>>> 33268fc20aa03953db648579dcbf7e5783b6feb4:frontMenu.py
 label.pack(pady=0, padx=10)
 
 
