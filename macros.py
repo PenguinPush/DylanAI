@@ -49,7 +49,7 @@ def read_info(key, item):
                         Variables.command = ""
 
                 if Variables.valid and Variables.command == "search":
-                    search_results(item[0], 3)
+                    print(search_results(item[0], 3))
 
 
 
