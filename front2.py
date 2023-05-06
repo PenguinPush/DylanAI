@@ -12,7 +12,7 @@ root = ctk.CTk()
 root.title("HI FIRENDS")
 root.geometry("800x600")
 c=0  # amount of inputs given
-dataBase = open('custom_macros.txt', '+')
+dataBase = open('custom_macros.txt', 'w+')
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
@@ -38,9 +38,7 @@ def add():
         global filename
         filename = filedialog.askopenfilename(initialdir = "/",
                                           title = "Select a File",
-                                          filetypes = (
-                                                       ("all files",
-                                                        "*.*")))  
+                                          filetypes = ("all files", "*.*"))
         x.configure(text=Path(filename).stem)
         filename = " "
         return filename
