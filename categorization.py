@@ -1,7 +1,6 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-commands = {"typing", "open app", "other"}
 default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Manager",
     "Discord", "Instagram", "Netflix", "Microsoft Excel", "TikTok",
     "Zoom", "Google Maps", "Twitter", "Gmail",
@@ -9,8 +8,9 @@ default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Man
     "Snapchat", "Twitch", "Adobe Illustrator",
     "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Spotify",
     "Adobe Premiere Pro", "Google Translate", "Google Docs", "Google Sheets", "Google Slides",
-    "Microsoft Edge", "Microsoft Paint"
-    ]
+    "Microsoft Edge", "Microsoft Paint"]
+default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
+browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list):
 
@@ -86,6 +86,9 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, locate {subject}", "search"),
             Example(f"Dylan, find me a {subject} online", "search"),
             Example(f"Dylan, look for a {subject}", "search"),
+            Example(f"Dylan, look up {subject}", "search"),
+            Example(f"Dylan, Google search {subject}", "search"),
+            Example(f"Dylan, search the internet for {subject}", "search"),
 
             Example(f"Dylan, update {subject}", "other"),
             Example(f"Dylan, configure {subject}", "other"),
