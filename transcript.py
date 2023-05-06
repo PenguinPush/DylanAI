@@ -30,13 +30,12 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
 
     while True:
         text = result_queue.get()
-        print(text)
-        if text.lower() != "stop" and text.lower() != "stop.":
-            if text != "" and text != " ":
-                categories = categorize(text)
+        if text != "" or text != " ":
+            print("\n" + text)
+            categories = categorize(text)
 
-                for key, item in categories.items():
-                    print(f"{key}: {item}")
+            for key, item in categories.items():
+                print(f"{key}: {item}")
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
     #load the speech recognizer and set the initial energy threshold and pause threshold
