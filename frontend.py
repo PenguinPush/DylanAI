@@ -1,4 +1,3 @@
-
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import *
@@ -29,8 +28,8 @@ menuCloseImage = PhotoImage(file="menuClose.png")
 def switch():
     global menuState
     if menuState is True:
-        for x in range(301):
-            menuFrame.place(x=-x, y=0)
+        for b in range(301):
+            menuFrame.place(x=-b, y=0)
             barTop.update()
 
        
@@ -43,14 +42,15 @@ def switch():
         barTop.config(bg="#3C3744")
         root.config(bg="#242424")
 
-        for x in range(-300, 0):
-            menuFrame.place(x=x, y=0)
+        for b in range(-300, 0):
+            menuFrame.place(x=b, y=0)
             barTop.update()
 
         menuState = True
 
 
-
+def hi():
+    print("e")
 
 
 topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="#3C3744", bd=0, padx=20, command=switch)
@@ -65,9 +65,22 @@ tk.Label(menuFrame, font="Bahnschrift 15", bg="#817A90", fg="#3C3744", height=2,
 
 y = 80
 options = ["Menu", "Dylan", "Help"]
-for i in range(3):
-    tk.Button(menuFrame, text=options[i], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0).place(x=25, y=y)
-    y += 110
+def button(a,x,y,cmd):
+
+    def invert_colors(event):
+        bg = but.cget("bg")
+        fg = but.cget("fg")
+        but.config(background=fg, foreground=bg)
+
+    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C374433", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
+    but.place(x=x, y=y)
+    but.bind("<Enter>", invert_colors)
+    but.bind("<Leave>", invert_colors)
+
+button(0,35,80,hi())
+button(1,35,190,hi())
+button(2,35,300,hi())
+
 
 menuClose = tk.Button(menuFrame, image=menuCloseImage, bg="#817A90", bd=0, command=switch)
 menuClose.place(x=250, y=10)
