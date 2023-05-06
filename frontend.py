@@ -92,6 +92,12 @@ label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=(
 label.pack(pady=12, padx=10)
 label = ctk.CTkLabel(master=frame, text="FILLER", text_color="#FFEAEC", font=("Nexa Heavy", 15))
 label.pack(pady=25, padx=10)
+label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
+label.pack(pady=0, padx=10)
+
+
+label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#FFEAEC", font=("nexa bold", 15))
+label.pack(pady=1, padx=10)
 
 
 

@@ -86,4 +86,13 @@ menuClose.place(x=250, y=10)
 
 #menuclose
 
+label = ctk.CTkLabel(master=frame, text="HELP", text_color="#FFEAEC", font=("nexa bold", 70))
+label.pack(pady=12, padx=10)
+
+
+
+
+
+
 root.mainloop()
+
