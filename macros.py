@@ -1,6 +1,6 @@
 from categorization import default_list
 from categorization import default_list_locations
-from categorization import browser
+from searching import search_results
 import os
 import keyboard
 import mouse
@@ -47,5 +47,9 @@ def read_info(key, item):
                         webbrowser.open(item_location)
                         Variables.valid = False
                         Variables.command = ""
+
+                if Variables.valid and Variables.command == "search":
+                    search_results(item[0], 3)
+
 
 
