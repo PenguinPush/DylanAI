@@ -59,16 +59,17 @@ def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir
             data = io.BytesIO(audio.get_wav_data())
             filename = (f"temp{i}.wav")
             audio_data = filename
-            write(filename, 16000, np.frombuffer(audio.frame_data))
+            write(filename, 8000, np.frombuffer(audio.frame_data))
             audio_queue.put_nowait(audio_data)
 
             i += 1
+            wav_checked = False
 
 def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose, save_file):
-    highest_i = 0
+    wav_checked = True
     while True:
-        if os.path.exists(filename) and highest_i < i:
-            highest_i = i
+        if os.path.exists(filename) and wav_checked == False:
+            wav_checked = True
             audio_file = open(filename, "rb")
             result = openai.Audio.transcribe("whisper-1", audio_file)
             predicted_text = result["text"]
