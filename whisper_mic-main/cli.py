@@ -9,10 +9,6 @@ import threading
 import click
 import torch
 import numpy as np
-import noisereduce as nr
-import keyboard
-import mouse
-import time
 
 @click.command()
 @click.option("--model", default="base", help="Model to use", type=click.Choice(["tiny","base", "small","medium","large"]))
@@ -21,7 +17,7 @@ import time
 @click.option("--verbose", default=False, help="Whether to print verbose output", is_flag=True,type=bool)
 @click.option("--energy", default=1000, help="Energy level for mic to detect", type=int)
 @click.option("--dynamic_energy", default=True, is_flag=True, help="Flag to enable dynamic energy", type=bool)
-@click.option("--pause", default=0.2, help="Pause time before entry ends", type=float)
+@click.option("--pause", default=0.5, help="Pause time before entry ends", type=float)
 @click.option("--save_file",default=False, help="Flag to save file", is_flag=True,type=bool)
 
 def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
@@ -38,10 +34,10 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
                      args=(audio_queue, result_queue, audio_model, english, verbose, save_file)).start()
 
     while True:
-        print(result_queue.get())
+        text = result_queue.get()
+        print(text)
         transcript = open("transcript.txt", "a")
-        transcript.write(result_queue.get() + "\n")
-        transcript.close()
+        transcript.write(text + "\n")
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
@@ -56,7 +52,7 @@ def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir
         i = 0
         while True:
             #get and save audio to wav file
-            audio = r.listen(source)
+            audio = r.listen(source, phrase_time_limit=5, )
             if save_file:
                 data = io.BytesIO(audio.get_wav_data())
                 audio_clip = AudioSegment.from_file(data)
@@ -94,8 +90,12 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
 
 if __name__ == "__main__":
     r = sr.Recognizer()
+    print("Pytorch CUDA Version is", torch.cuda.is_available())
     with sr.Microphone() as source:
         print("Please wait. Calibrating microphone...")
         r.adjust_for_ambient_noise(source, duration=5)
+
+    transcript = open("transcript.txt", 'r+')
+    transcript.truncate(0)
 
     main()
