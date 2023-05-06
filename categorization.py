@@ -1,15 +1,8 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Manager",
-    "Discord", "Instagram", "Netflix", "Microsoft Excel", "TikTok",
-    "Zoom", "Google Maps", "Twitter", "Gmail",
-    "Pinterest", "LinkedIn", "Amazon", "Google Drive",
-    "Snapchat", "Twitch",
-    "Microsoft Teams", "Spotify",
-    "Adobe Premiere Pro", "Google Translate", "Google Docs", "Google Sheets", "Google Slides",
-    "Microsoft Edge", "Microsoft Paint"]
-default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
+default_list = ["Chrome", "Youtube", "Google Translate", "File Explorer", "Notepad"]
+default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list):
