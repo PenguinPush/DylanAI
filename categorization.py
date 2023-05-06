@@ -2,13 +2,31 @@ import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
 commands = {"typing", "open app", ""}
-default_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
+default_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother",
+    "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok",
+    "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail",
+    "Pinterest", "LinkedIn", "Amazon", "Slack", "Google Drive", "Dropbox", "Microsoft Word",
+    "iMovie", "Snapchat", "Notion", "Reddit", "Twitch", "Adobe Illustrator", "Skype",
+    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Apple Music", "Google Photos",
+    "Adobe Premiere Pro", "Microsoft Outlook", "Telegram", "VLC Media Player", "Google Translate",
+    "Microsoft OneNote", "Adobe Acrobat", "Google Docs", "Google Sheets", "Google Slides",
+    "Microsoft Edge", "Mozilla Firefox", "Viber", "WeChat", "Microsoft Paint", "Apple Notes"
+    ]
 
 def categorize(input, subject_list=default_list):
 
     if subject_list is None:
-        subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord",
-                        "instagram", "@vickyqchu"]
+        subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother",
+    "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok",
+    "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail",
+    "Pinterest", "LinkedIn", "Amazon", "Slack", "Google Drive", "Dropbox", "Microsoft Word",
+    "iMovie", "Snapchat", "Notion", "Reddit", "Twitch", "Adobe Illustrator", "Skype",
+    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Apple Music", "Google Photos",
+    "Adobe Premiere Pro", "Microsoft Outlook", "Telegram", "VLC Media Player", "Google Translate",
+    "Microsoft OneNote", "Adobe Acrobat", "Google Docs", "Google Sheets", "Google Slides",
+    "Microsoft Edge", "Mozilla Firefox", "Viber", "WeChat", "Microsoft Paint", "Apple Notes"
+    ]
+
     inputs = [input]
     data_validity = [
         Example("Dylan, fetch me a water bottle", "not computer related"),
@@ -44,7 +62,17 @@ def categorize(input, subject_list=default_list):
         Example("Dylan, water the plants in the garden.", "not computer related")
     ]
 
-    temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok", "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail"]
+    temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother",
+    "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok",
+    "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail",
+    "Pinterest", "LinkedIn", "Amazon", "Slack", "Google Drive", "Dropbox", "Microsoft Word",
+    "iMovie", "Snapchat", "Notion", "Reddit", "Twitch", "Adobe Illustrator", "Skype",
+    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Apple Music", "Google Photos",
+    "Adobe Premiere Pro", "Microsoft Outlook", "Telegram", "VLC Media Player", "Google Translate",
+    "Microsoft OneNote", "Adobe Acrobat", "Google Docs", "Google Sheets", "Google Slides",
+    "Microsoft Edge", "Mozilla Firefox", "Viber", "WeChat", "Microsoft Paint", "Apple Notes"
+    ]
+
     data_command = []
     data_subject = []
     for subject in subject_list:
