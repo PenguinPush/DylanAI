@@ -26,10 +26,25 @@ def categorize(input, subject_list=default_list):
         Example("skip this current song", "invalid command"),
         Example("have sex with my mom", "invalid command"),
         Example("Dylan, do something physical", "not computer related"),
-        Example("Dylan, do something virtual", "valid command")
+        Example("Dylan, do something virtual", "valid command"),
+        Example("Dylan, search for a recipe for chocolate chip cookies.", "valid command"),
+        Example("Dylan, play the latest episode of 'Game of Thrones'.", "valid command"),
+        Example("Dylan, send an email to John with the attachment.", "valid command"),
+        Example("Dylan, schedule a meeting for tomorrow at 2 PM.", "valid command"),
+        Example("Dylan, set a reminder for my dentist appointment on Friday.", "valid command"),
+        Example("Search for a recipe for chocolate chip cookies.", "invalid command"),
+        Example("Play the latest episode of 'Game of Thrones'.", "invalid command"),
+        Example("Send an email to John with the attachment.", "invalid command"),
+        Example("Schedule a meeting for tomorrow at 2 PM.", "invalid command"),
+        Example("Set a reminder for my dentist appointment on Friday.", "invalid command"),
+        Example("Dylan, pass the salt, please.", "not computer related"),
+        Example("Dylan, turn on the lights in the living room.", "not computer related"),
+        Example("Dylan, order a pizza for dinner tonight.", "not computer related"),
+        Example("Dylan, feed the dog before leaving.", "not computer related"),
+        Example("Dylan, water the plants in the garden.", "not computer related")
     ]
 
-    temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
+    temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu", "Netflix", "Microsoft Excel", "TikTok", "Zoom", "Google Maps", "Adobe Photoshop", "Facebook", "Twitter", "WhatsApp", "Gmail"]
     data_command = []
     data_subject = []
     for subject in subject_list:
