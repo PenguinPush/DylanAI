@@ -9,7 +9,7 @@ default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Man
     "Microsoft Teams", "Spotify",
     "Adobe Premiere Pro", "Google Translate", "Google Docs", "Google Sheets", "Google Slides",
     "Microsoft Edge", "Microsoft Paint"]
-default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
+default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list):
@@ -89,6 +89,8 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, look up {subject}", "search"),
             Example(f"Dylan, Google search {subject}", "search"),
             Example(f"Dylan, search the internet for {subject}", "search"),
+            Example(f"Dylan, browse for a {subject}", "search"),
+            Example(f"Dylan, browse the web for {subject}", "search"),
 
             Example(f"Dylan, update {subject}", "other"),
             Example(f"Dylan, configure {subject}", "other"),
