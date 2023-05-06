@@ -4,9 +4,9 @@ co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
 default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Manager",
     "Discord", "Instagram", "Netflix", "Microsoft Excel", "TikTok",
     "Zoom", "Google Maps", "Twitter", "Gmail",
-    "Pinterest", "LinkedIn", "Amazon", "Google Drive", "Microsoft Word",
-    "Snapchat", "Twitch", "Adobe Illustrator",
-    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Spotify",
+    "Pinterest", "LinkedIn", "Amazon", "Google Drive",
+    "Snapchat", "Twitch",
+    "Microsoft Teams", "Spotify",
     "Adobe Premiere Pro", "Google Translate", "Google Docs", "Google Sheets", "Google Slides",
     "Microsoft Edge", "Microsoft Paint"]
 default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
