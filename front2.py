@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import tkinter as tk
 from pathlib import Path
+import os
 from tkinter import *
 from tkinter import filedialog
 filename = " "
@@ -12,7 +13,7 @@ root = ctk.CTk()
 root.title("HI FIRENDS")
 root.geometry("800x600")
 c=0  # amount of inputs given
-dataBase = open('custom_macros.txt', 'w+')
+dataBase = open('custom_macros.txt', 'w')
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
@@ -38,8 +39,8 @@ def add():
         global filename
         filename = filedialog.askopenfilename(initialdir = "/",
                                           title = "Select a File",
-                                          filetypes = ("all files", "*.*"))
-        x.configure(text=Path(filename).stem)
+                                          filetypes = (("all files", "*.*"),("txt files", "*.txt")))
+        x.configure(text=os.path.basename(filename))
         filename = " "
         return filename
     
