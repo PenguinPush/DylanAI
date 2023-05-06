@@ -1,7 +1,7 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-commands = {"typing", "open app", "other"}
+commands = {"typing", "open app", "search", "other"}
 default_list = ["Chrome", "Youtube", "Google Translate", "File Explorer", "Notepad"]
 default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
@@ -76,33 +76,10 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, send {subject} a text message", "type"),
             Example(f"Dylan, respond to {subject}", "type"),
 
-            Example(f"Dylan, update {subject}", "other"),
-            Example(f"Dylan, configure {subject}", "other"),
-            Example(f"Dylan, troubleshoot {subject}", "other"),
-            Example(f"Dylan, customize {subject}", "other"),
-            Example(f"Dylan, analyze {subject}", "other"),
-            Example(f"Dylan, organize {subject}", "other"),
-            Example(f"Dylan, schedule {subject}", "other"),
-            Example(f"Dylan, backup {subject}", "other"),
-            Example(f"Dylan, restore {subject}", "other"),
-            Example(f"Dylan, export {subject}", "other"),
-            Example(f"Dylan, import {subject}", "other"),
-            Example(f"Dylan, record {subject}", "other"),
-            Example(f"Dylan, stream {subject}", "other"),
-            Example(f"Dylan, broadcast {subject}", "other"),
-            Example(f"Dylan, stop {subject}", "other"),
-            Example(f"Dylan, shuffle {subject}", "other"),
-            Example(f"Dylan, repeat {subject}", "other"),
-            Example(f"Dylan, skip {subject}", "other"),
-            Example(f"Dylan, rewind {subject}", "other"),
-            Example(f"Dylan, fast forward {subject}", "other"),
-            Example(f"Dylan, delete {subject}", "other"),
-            Example(f"Dylan, clear {subject}", "other"),
-            Example(f"Dylan, undo {subject}", "other"),
-            Example(f"Dylan, redo {subject}", "other"),
-            Example(f"Dylan, resize {subject}", "other"),
-            Example(f"Dylan, rotate {subject}", "other"),
-            Example(f"Dylan, crop {subject}", "other"),
+            Example(f"Dylan, Google {subject}", "search"),
+            Example(f"Dylan, look up {subject}", "search"),
+            Example(f"Dylan, check the web for {subject}", "search"),
+            Example(f"Dylan, tell me about {subject}", "search"),
 
             Example(f"Dylan, lift {subject}", "other"),
             Example(f"Dylan, throw {subject}", "other"),

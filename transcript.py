@@ -58,8 +58,8 @@ def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir
             write(Variables.filename, 32000, data)
             audio_queue.put_nowait(audio_data)
 
-            if os.path.exists(f"temp{Variables.i - 5}.wav"):
-                os.remove(f"temp{Variables.i - 5}.wav")
+            if os.path.exists(f"temp{Variables.i - 10}.wav"):
+                os.remove(f"temp{Variables.i - 10}.wav")
 
             Variables.i += 1
             Variables.wav_checked = False
