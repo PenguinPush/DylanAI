@@ -26,8 +26,6 @@ def categorize(input, subject_list):
         Example("Dylan, do something virtual", "valid command")
     ]
 
-
-
     temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
     data_command = []
     data_subject = []
@@ -85,11 +83,8 @@ def categorize(input, subject_list):
         {
             "validity": (validity.classifications[0].prediction, validity.classifications[0].confidence),
             "command": (command.classifications[0].prediction, command.classifications[0].confidence),
-            "subject": (subject.classifications[0].prediction, subject.classifications[0].prediction),
+            "subject": (subject.classifications[0].prediction, subject.classifications[0].confidence),
 
         }
     )
-
-
-
 
