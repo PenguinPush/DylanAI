@@ -4,9 +4,9 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
 color = {"white": "#FFEAEC"}
-color = {"blackk": "#3C3744"}
 
 root = ctk.CTk()
+root.title("i want to fucking die")
 root.geometry("800x600")
 
 def login():

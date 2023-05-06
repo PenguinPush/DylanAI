@@ -4,15 +4,15 @@ import queue
 import tempfile
 import os
 import threading
-import torch
 import numpy as np
 import openai
 import glob
 from scipy.io.wavfile import write
 from categorization import categorize
 import noisereduce
+from macros import read_info
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 class Variables:
     i = 0
@@ -37,7 +37,8 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
             categories = categorize(text)
 
             for key, item in categories.items():
-                print(f"{key}: {item}")
+                read_info(key, item)
+
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
     #load the speech recognizer and set the initial energy threshold and pause threshold
@@ -69,7 +70,7 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
         if os.path.exists(Variables.filename) and Variables.wav_checked == False:
             Variables.wav_checked = True
             audio_file = open(Variables.filename, "rb")
-            result = openai.Audio.transcribe("whisper-1", audio_file, prompt="Use context clues to generate the text. If something that sounds alike to 'Dylan' is said, correct it to 'Dylan'. The transcript is about making requests to a virtual assistant named Dylan. It asks for things such as launching or opening apps, so keep this in mind when deciding what words to use.")
+            result = openai.Audio.transcribe("whisper-1", audio_file)
             predicted_text = result["text"]
             result_queue.put_nowait(predicted_text)
 
@@ -79,9 +80,9 @@ if __name__ == "__main__":
         os.remove(tempfilename)
 
     r = sr.Recognizer()
-    print("Pytorch CUDA Version is", torch.cuda.is_available())
+
     with sr.Microphone() as source:
         print("Please wait. Calibrating microphone...")
         r.adjust_for_ambient_noise(source, duration=5)
 
-    main(model="base", device=("cuda" if torch.cuda.is_available() else "cpu"), english=True, verbose=False, energy=1000, dynamic_energy=True, pause=0.3, save_file=False)
+    main(model="base", device="cuda", english=True, verbose=False, energy=1000, dynamic_energy=True, pause=0.3, save_file=False)

@@ -2,15 +2,7 @@ import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
 commands = {"typing", "open app", "other"}
-default_list = ["Chrome", "Safari", "Spotify", "Minecraft", "Youtube", "Task Manager",
-    "Discord", "Instagram", "Netflix", "Microsoft Excel", "TikTok",
-    "Zoom", "Google Maps", "Twitter", "Gmail",
-    "Pinterest", "LinkedIn", "Amazon", "Google Drive", "Microsoft Word",
-    "Snapchat", "Twitch", "Adobe Illustrator",
-    "Microsoft PowerPoint", "Microsoft Teams", "Google Calendar", "Spotify",
-    "Adobe Premiere Pro", "Google Translate", "Google Docs", "Google Sheets", "Google Slides",
-    "Microsoft Edge", "Microsoft Paint"
-    ]
+default_list = []
 
 def categorize(input, subject_list=default_list):
 
@@ -109,32 +101,32 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, rotate {subject}", "other"),
             Example(f"Dylan, crop {subject}", "other"),
 
-            Example("Dylan, lift {subject}", "other"),
-            Example("Dylan, throw {subject}", "other"),
-            Example("Dylan, run with {subject}", "other"),
-            Example("Dylan, kick {subject}", "other"),
-            Example("Dylan, catch {subject}", "other"),
-            Example("Dylan, climb {subject}", "other"),
-            Example("Dylan, balance {subject}", "other"),
-            Example("Dylan, jump over {subject}", "other"),
-            Example("Dylan, swim across {subject}", "other"),
-            Example("Dylan, ride {subject}", "other"),
-            Example("Dylan, drive {subject}", "other"),
-            Example("Dylan, fly {subject}", "other"),
-            Example("Dylan, walk on {subject}", "other"),
-            Example("Dylan, punch {subject}", "other"),
-            Example("Dylan, dance with {subject}", "other"),
-            Example("Dylan, exercise with {subject}", "other"),
-            Example("Dylan, hug {subject}", "other"),
-            Example("Dylan, kiss {subject}", "other"),
-            Example("Dylan, high-five {subject}", "other"),
-            Example("Dylan, shake hands with {subject}", "other"),
-            Example("Dylan, massage {subject}", "other"),
-            Example("Dylan, feed {subject}", "other"),
-            Example("Dylan, pet {subject}", "other"),
-            Example("Dylan, water {subject}", "other"),
-            Example("Dylan, paint {subject}", "other"),
-            Example("Dylan, carve {subject}", "other")
+            Example(f"Dylan, lift {subject}", "other"),
+            Example(f"Dylan, throw {subject}", "other"),
+            Example(f"Dylan, run with {subject}", "other"),
+            Example(f"Dylan, kick {subject}", "other"),
+            Example(f"Dylan, catch {subject}", "other"),
+            Example(f"Dylan, climb {subject}", "other"),
+            Example(f"Dylan, balance {subject}", "other"),
+            Example(f"Dylan, jump over {subject}", "other"),
+            Example(f"Dylan, swim across {subject}", "other"),
+            Example(f"Dylan, ride {subject}", "other"),
+            Example(f"Dylan, drive {subject}", "other"),
+            Example(f"Dylan, fly {subject}", "other"),
+            Example(f"Dylan, walk on {subject}", "other"),
+            Example(f"Dylan, punch {subject}", "other"),
+            Example(f"Dylan, dance with {subject}", "other"),
+            Example(f"Dylan, exercise with {subject}", "other"),
+            Example(f"Dylan, hug {subject}", "other"),
+            Example(f"Dylan, kiss {subject}", "other"),
+            Example(f"Dylan, high-five {subject}", "other"),
+            Example(f"Dylan, shake hands with {subject}", "other"),
+            Example(f"Dylan, massage {subject}", "other"),
+            Example(f"Dylan, feed {subject}", "other"),
+            Example(f"Dylan, pet {subject}", "other"),
+            Example(f"Dylan, water {subject}", "other"),
+            Example(f"Dylan, paint {subject}", "other"),
+            Example(f"Dylan, carve {subject}", "other")
         ]
 
     validity = co.classify(
@@ -158,7 +150,6 @@ def categorize(input, subject_list=default_list):
             "validity": (validity.classifications[0].prediction, validity.classifications[0].confidence),
             "command": (command.classifications[0].prediction, command.classifications[0].confidence),
             "subject": (subject.classifications[0].prediction, subject.classifications[0].confidence),
-
         }
     )
 

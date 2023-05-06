@@ -1,4 +1,3 @@
-
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import *
@@ -11,9 +10,15 @@ ctk.set_default_color_theme("green")
 color = {"nero": "#252726", "orange": "#FF8700", "darkorange": "#FE6101"}
 
 root = tk.Tk()
-root.title("Tkinter Navbar")
-root.config(bg="gray17")
-root.geometry("800x500")
+root.title("DYLAN !!!!")
+root.config(bg="#242424")
+root.geometry("800x600")
+
+barTop = tk.Frame(root, bg="#3C3744", height=50)
+barTop.pack(side="top", fill=tk.X)
+
+frame = ctk.CTkFrame(master=root)
+frame.pack(pady=20, padx=20, fill="both", expand=True)
 
 menuState = False
 
@@ -23,45 +28,61 @@ menuCloseImage = PhotoImage(file="menuClose.png")
 def switch():
     global menuState
     if menuState is True:
-        for x in range(301):
-            menuFrame.place(x=-x, y=0)
+        for b in range(301):
+            menuFrame.place(x=-b, y=0)
             barTop.update()
 
        
-        barTop.config(bg=color["orange"])
-        root.config(bg="gray17")
+        barTop.config(bg="#3C3744")
+        root.config(bg="#242424")
 
         menuState = False
     else:
        
-        barTop.config(bg=color["nero"])
-        root.config(bg=color["nero"])
+        barTop.config(bg="#3C3744")
+        root.config(bg="#242424")
 
-        for x in range(-300, 0):
-            menuFrame.place(x=x, y=0)
+        for b in range(-300, 0):
+            menuFrame.place(x=b, y=0)
             barTop.update()
 
         menuState = True
 
-barTop = tk.Frame(root, bg=color["orange"], height=50)
-barTop.pack(side="top", fill=tk.X)
+
+def hi():
+    print("e")
 
 
-
-topBar = tk.Button(barTop, image=menuOpenImage, bg=color["orange"], activebackground=color["orange"], bd=0, padx=20, command=switch)
+topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="#3C3744", bd=0, padx=20, command=switch)
 topBar.place(x=10, y=10)
 
-menuFrame = tk.Frame(root, bg="gray17", height=1000, width=300)
+label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
+label.pack(pady=12, padx=10)
+
+menuFrame = tk.Frame(root, bg="#242424", height=1000, width=300)
 menuFrame.place(x=-300, y=0)
-tk.Label(menuFrame, font="Bahnschrift 15", bg=color["orange"], fg="black", height=2, width=300, padx=20).place(x=0, y=0)
+tk.Label(menuFrame, font="Bahnschrift 15", bg="#817A90", fg="#3C3744", height=2, width=300, padx=20).place(x=0, y=-4)
 
 y = 80
 options = ["Menu", "Dylan", "Help"]
-for i in range(3):
-    tk.Button(menuFrame, text=options[i], font="BahnschriftLight 15", bg="gray17", fg=color["orange"], activebackground="gray17", activeforeground="green", bd=0).place(x=25, y=y)
-    y += 40
+def button(a,x,y,cmd):
 
-menuClose = tk.Button(menuFrame, image=menuCloseImage, bg=color["orange"], activebackground=color["orange"], bd=0, command=switch)
+    def invert_colors(event):
+        bg = but.cget("bg")
+        fg = but.cget("fg")
+        but.config(background=fg, foreground=bg)
+
+    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C374433", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
+    but.place(x=x, y=y)
+    but.bind("<Enter>", invert_colors)
+    but.bind("<Leave>", invert_colors)
+
+button(0,35,80,hi())
+button(1,35,190,hi())
+button(2,35,300,hi())
+
+
+menuClose = tk.Button(menuFrame, image=menuCloseImage, bg="#817A90", bd=0, command=switch)
 menuClose.place(x=250, y=10)
 
 root.mainloop()
@@ -69,10 +90,6 @@ root.mainloop()
 
 # MENU CLOSE
 
-frame = ctk.CTkFrame(master=root)
-frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("nexa bold", 70))
-label.pack(pady=12, padx=10)
 
 root.mainloop()
