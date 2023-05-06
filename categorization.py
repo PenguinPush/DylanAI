@@ -1,11 +1,19 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-default_list = ["Chrome", "Youtube", "Google Translate", "File Explorer", "Notepad"]
-default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]default_list_locations = ["C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "https://youtube.com", "https://translate.google.com/", "C:\Windows\explorer.exe", "C:\Windows\\notepad.exe"]
+commands = {"typing", "open app", "other"}
+
+
+default_list_dict = {
+    "Chrome": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s",
+    "Youtube": "https://youtube.com",
+    "Google Trasnlate": "https://translate.google.com/",
+    "File explorer": "C:\Windows\explorer.exe",
+    "Notepad": "C:\Windows\\notepad.exe"
+}
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
-def categorize(input, subject_list=default_list):
+def categorize(input, subject_list=default_list_dict.keys()):
 
     inputs = [input]
     data_validity = [
@@ -79,9 +87,6 @@ def categorize(input, subject_list=default_list):
             Example(f"Dylan, locate {subject}", "search"),
             Example(f"Dylan, find me a {subject} online", "search"),
             Example(f"Dylan, look for a {subject}", "search"),
-            Example(f"Dylan, look up {subject}", "search"),
-            Example(f"Dylan, Google search {subject}", "search"),
-            Example(f"Dylan, search the internet for {subject}", "search"),
             Example(f"Dylan, browse for a {subject}", "search"),
             Example(f"Dylan, browse the web for {subject}", "search"),
 
