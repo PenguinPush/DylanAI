@@ -33,7 +33,8 @@ def read_info(key, item, text):
 
         case "subject":
             if item[1] > confidence_threshold:
-                item_location = default_list_dict[item[0]]
+                item_location = default_list_dict.get(item[0])
+                print(item_location)
 
                 if item_location.startswith("http"):
                     subject_type = "url"

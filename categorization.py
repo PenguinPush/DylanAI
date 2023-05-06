@@ -4,10 +4,9 @@ co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
 
 
 default_list_dict = {
-    "Chrome": "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk",
     "Youtube": "https://youtube.com",
     "Google Translate": "https://translate.google.com/",
-    "File explorer": "C:\Windows\explorer.exe",
+    "File Explorer": "C:\Windows\explorer.exe",
     "Notepad": "C:\Windows\\notepad.exe"
 }
 
