@@ -30,6 +30,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
 
     while True:
         text = result_queue.get()
+        Variables.latestText = text
         if text == "" or text == " ":
             print()
         else:
@@ -37,7 +38,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
             categories = categorize(text)
 
             for key, item in categories.items():
-                read_info(key, item)
+                read_info(key, item, text)
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):

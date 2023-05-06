@@ -1,7 +1,6 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
-commands = {"typing", "open app", "other"}
 
 
 default_list_dict = {
@@ -11,6 +10,7 @@ default_list_dict = {
     "File explorer": "C:\Windows\explorer.exe",
     "Notepad": "C:\Windows\\notepad.exe"
 }
+
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list_dict.keys()):
