@@ -26,7 +26,6 @@ def add():
 
     x=ctk.CTkEntry(scroll,fg_color="#817A90",placeholder_text="Description",placeholder_text_color="#FFEAEC",font=("nexa bold", 20),border_width=0)
     x.pack(side=ctk.RIGHT,pady=10, padx=(10,20),fill=ctk.BOTH, expand=True)
-    label2.place=(label1.winfo_height()+10)
 
     y=ctk.CTkEntry(scroll,fg_color="#817A90",placeholder_text="Name",placeholder_text_color="#FFEAEC",font=("nexa bold", 20),border_width=0)
     y.pack(pady=10, padx=10,fill=ctk.BOTH, expand=True)
