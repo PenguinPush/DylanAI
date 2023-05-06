@@ -11,7 +11,7 @@ color = {"nero": "#252726", "orange": "#FF8700", "darkorange": "#FE6101"}
 
 root = tk.Tk()
 root.title("DYLAN !!!!")
-root.iconbitmap("bird_white.ico")
+root.iconbitmap("bird_black.ico")
 root.config(bg="#242424")
 root.geometry("800x700")
 
