@@ -9,6 +9,7 @@ import numpy as np
 import openai
 import glob
 from scipy.io.wavfile import write
+import categorization
 
 openai.api_key = "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"
 
@@ -29,6 +30,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
     while True:
         text = result_queue.get()
         print(text)
+        categorization.categorize(text)
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
     #load the speech recognizer and set the initial energy threshold and pause threshold
