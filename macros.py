@@ -1,5 +1,4 @@
-from categorization import default_list
-from categorization import default_list_locations
+from categorization import default_list_dict
 from categorization import get_searchable_term
 from searching import search_results
 import os
@@ -31,7 +30,7 @@ def read_info(key, item):
 
         case "subject":
             if item[1] > confidence_threshold:
-                item_location = default_list_locations[default_list.index(item[0])]
+                item_location = default_list_dict[item[0]]
 
                 if item_location.startswith("http"):
                     subject_type = "url"
