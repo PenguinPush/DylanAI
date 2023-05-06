@@ -38,7 +38,10 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
                      args=(audio_queue, result_queue, audio_model, english, verbose, save_file)).start()
 
     while True:
-        print(result_queue.get(), file=transcript)
+        print(result_queue.get())
+        transcript = open("transcript.txt", "a")
+        transcript.write(result_queue.get() + "\n")
+        transcript.close()
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
@@ -90,7 +93,6 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
             os.remove(audio_data)
 
 if __name__ == "__main__":
-    transcript = open("transcript.txt")
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Please wait. Calibrating microphone...")
