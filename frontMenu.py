@@ -97,4 +97,13 @@ label.pack(pady=1, padx=10)
 
 
 
+
+def get_value(val):
+    print(val)
+
+
+slider = tk.Scale(root, from_=0, to=100, orient='horizontal', command=get_value)
+slider.pack(pady=20)
+
+
 root.mainloop()

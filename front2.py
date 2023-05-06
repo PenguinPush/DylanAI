@@ -11,6 +11,8 @@ ctk.set_default_color_theme("green")
 
 color = {"white": "#FFEAEC"}
 
+
+
 root = ctk.CTk()
 root.title("HI FIRENDS")
 root.geometry("800x600")
