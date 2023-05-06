@@ -4,14 +4,11 @@ co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
 
 
 default_list_dict = {
-    "Chrome": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s",
     "Youtube": "https://youtube.com",
     "Google Translate": "https://translate.google.com/",
-    "File explorer": "C:\Windows\explorer.exe",
+    "File Explorer": "C:\Windows\explorer.exe",
     "Notepad": "C:\Windows\\notepad.exe"
 }
-
-browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list_dict.keys()):
     inputs = [input]
@@ -63,11 +60,10 @@ def categorize(input, subject_list=default_list_dict.keys()):
         ]
         data_command += [
             Example(f"Dylan, open {subject} in my web browser", "open"),
-            Example(f"Dylan, open {subject} for me", "open"),
+            Example(f"Dylan, run {subject} for me", "open"),
             Example(f"Dylan, open {subject}", "open"),
             Example(f"Dylan, please open {subject}", "open"),
-            Example(f"Dylan, open {subject} pleaseplaseplasea", "open"),
-            Example(f"Dylan, run {subject}", "open"),
+            Example(f"Dylan, open {subject}", "open"),
             Example(f"Dylan, run {subject}", "open"),
             Example(f"Dylan, create a new {subject} tab something", "open"),
             Example(f"Dylan, can you please open {subject}", "open"),
@@ -82,9 +78,9 @@ def categorize(input, subject_list=default_list_dict.keys()):
             Example(f"Dylan, respond to {subject}", "type"),
 
             Example(f"Dylan, search for {subject}", "search"),
-            Example(f"Dylan, find mcdonalds locations near me", "search"),
+            Example(f"Dylan, find {subject} locations near me", "search"),
             Example(f"Dylan, locate {subject}", "search"),
-            Example(f"Dylan, find me a {subject} online", "search"),
+            Example(f"Dylan, find me a {subject}", "search"),
             Example(f"Dylan, look for a {subject}", "search"),
             Example(f"Dylan, browse for a {subject}", "search"),
             Example(f"Dylan, browse the web for {subject}", "search"),
