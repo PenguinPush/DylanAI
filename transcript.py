@@ -9,6 +9,11 @@ import threading
 import click
 import torch
 import numpy as np
+import openai
+import glob
+from scipy.io.wavfile import write
+
+openai.api_key = "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"
 
 @click.command()
 @click.option("--model", default="base", help="Model to use", type=click.Choice(["tiny","base", "small","medium","large"]))
@@ -17,11 +22,10 @@ import numpy as np
 @click.option("--verbose", default=False, help="Whether to print verbose output", is_flag=True,type=bool)
 @click.option("--energy", default=1000, help="Energy level for mic to detect", type=int)
 @click.option("--dynamic_energy", default=True, is_flag=True, help="Flag to enable dynamic energy", type=bool)
-@click.option("--pause", default=0.5, help="Pause time before entry ends", type=float)
+@click.option("--pause", default=0.3, help="Pause time before entry ends", type=float)
 @click.option("--save_file",default=False, help="Flag to save file", is_flag=True,type=bool)
 
 def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
-    temp_dir = tempfile.mkdtemp() if save_file else None
     #there are no english models for large
     if model != "large" and english:
         model = model + ".en"
@@ -43,59 +47,37 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
     #load the speech recognizer and set the initial energy threshold and pause threshold
     r = sr.Recognizer()
-    r.energy_threshold = energy
-    r.pause_threshold = pause
-    r.dynamic_energy_threshold = dynamic_energy
+    r.phrase_threshold = 0.5
+    r.pause_threshold = 0.5
+    r.non_speaking_duration = 0.5
 
     with sr.Microphone(sample_rate=16000) as source:
         print("Model Loaded!")
         i = 0
         while True:
-            #get and save audio to wav file
             audio = r.listen(source, phrase_time_limit=5, )
-            if save_file:
-                data = io.BytesIO(audio.get_wav_data())
-                audio_clip = AudioSegment.from_file(data)
-                filename = os.path.join(temp_dir, f"temp{i}.wav")
-                audio_clip.export(filename, format="wav")
-                audio_data = filename
-            else:
-                torch_audio = torch.from_numpy(np.frombuffer(audio.get_raw_data(), np.int16).flatten().astype(np.float32) / 32768.0)
-                #reduced_noise = nr.reduce_noise(y=torch_audio.data, sr=16000, prop_decrease=1)
-                audio_data = torch_audio
-
+            data = io.BytesIO(audio.get_wav_data())
+            filename = (f"temp{i}.wav")
+            audio_data = filename
+            write(filename, 16000, np.frombuffer(audio.frame_data))
             audio_queue.put_nowait(audio_data)
+
             i += 1
 
-
 def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose, save_file):
+    highest_i = 0
     while True:
-        audio_data = audio_queue.get()
-        if english:
-            result = audio_model.transcribe(audio_data,language='english')
-        else:
-            result = audio_model.transcribe(audio_data)
-
-        if not verbose:
+        if os.path.exists(filename) and highest_i < i:
+            highest_i = i
+            audio_file = open(filename, "rb")
+            result = openai.Audio.transcribe("whisper-1", audio_file)
             predicted_text = result["text"]
-
-            if predicted_text != " .":
-                result_queue.put_nowait(predicted_text)
-
-        else:
-            result_queue.put_nowait(result)
-
-        if save_file:
-            os.remove(audio_data)
+            result_queue.put_nowait(predicted_text)
 
 if __name__ == "__main__":
-    r = sr.Recognizer()
-    print("Pytorch CUDA Version is", torch.cuda.is_available())
-    with sr.Microphone() as source:
-        print("Please wait. Calibrating microphone...")
-        r.adjust_for_ambient_noise(source, duration=5)
-
-    transcript = open("transcript.txt", 'r+')
-    transcript.truncate(0)
-
+    i = 0
+    temp_dir = tempfile.mkdtemp()
+    filename = (f"temp{i}.wav")
+    for tempfilename in glob.glob("./temp*"):
+        os.remove(tempfilename)
     main()

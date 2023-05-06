@@ -4,67 +4,67 @@ co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
 commands = {"typing", "open app", ""}
 
 
-data_validity = [
-    Example("Dylan, fetch me a water bottle", "not computer related"),
-    Example("Dylan, open me a new chrome tab", "valid command"),
-    Example("open me a new chrome tab", "invalid command"),
-    Example("Dylan, type good game in chat", "valid command"),
-    Example("Dylan, pause the youtube video", "valid command"),
-    Example("Dylan, skip this current song", "valid command"),
-    Example("Dylan, open instagram", "valid command"),
-    Example("Dylan, open the door for me", "not computer related"),
-    Example("Dylan, have sex with my mom", "not computer related"),
-    Example("Dylan, give me head", "not computer related"),
-    Example("type good game in chat", "invalid command"),
-    Example("pause the youtube video", "invalid command"),
-    Example("skip this current song", "invalid command"),
-    Example("have sex with my mom", "invalid command"),
-    Example("Dylan, do something physical", "not computer related"),
-    Example("Dylan, do something virtual", "valid command")
-]
+def categorize(input, subject_list):
 
-
-
-temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
-data_command = []
-data_subject = []
-for temp_subject in temp_subject_list:
-    data_subject += [
-        Example(f"Dylan, please open {temp_subject}", temp_subject),
-        Example(f"Dylan, type {temp_subject} for me", temp_subject),
-        Example(f"Dylan, run {temp_subject} quickly", temp_subject),
-        Example(f"Dylan, message {temp_subject} pleaeplease", temp_subject),
-        Example(f"Dylan, please run {temp_subject}", temp_subject),
-        Example(f"Dylan, fuck {temp_subject} around", temp_subject),
-        Example(f"Dylan, get {temp_subject}'s address", temp_subject),
-        Example(f"Dylan, close {temp_subject}'s windows", temp_subject),
-        Example(f"Dylan, skip {temp_subject} in the playlist", temp_subject),
-
-    ]
-    data_command += [
-        Example(f"Dylan, open {temp_subject} in my web browser", "open"),
-        Example(f"Dylan, open {temp_subject} for me", "open"),
-        Example(f"Dylan, open {temp_subject}", "open"),
-        Example(f"Dylan, please open {temp_subject}", "open"),
-        Example(f"Dylan, open {temp_subject} pleaseplaseplasea", "open"),
-        Example(f"Dylan, run {temp_subject}", "open"),
-        Example(f"Dylan, run {temp_subject}", "open"),
-        Example(f"Dylan, create a new {temp_subject} tab something", "open"),
-
-        Example(f"Dylan, can you please open {temp_subject}", "open"),
-        Example(f"Dylan, type {temp_subject}", "type"),
-        Example(f"Dylan, can you type {temp_subject}", "type"),
-        Example(f"Dylan, type {temp_subject}", "type"),
-        Example("Dylan, please type a response in chat", "type"),
-        Example(f"Dylan, message {temp_subject}", "type"),
-        Example(f"Dylan, reply to {temp_subject}", "type"),
-        Example(f"Dylan, send {temp_subject} a text message", "type"),
-        Example(f"dylsn, respond to {temp_subject}", "type"),
-
+    inputs = [input]
+    data_validity = [
+        Example("Dylan, fetch me a water bottle", "not computer related"),
+        Example("Dylan, open me a new chrome tab", "valid command"),
+        Example("open me a new chrome tab", "invalid command"),
+        Example("Dylan, type good game in chat", "valid command"),
+        Example("Dylan, pause the youtube video", "valid command"),
+        Example("Dylan, skip this current song", "valid command"),
+        Example("Dylan, open instagram", "valid command"),
+        Example("Dylan, open the door for me", "not computer related"),
+        Example("Dylan, have sex with my mom", "not computer related"),
+        Example("Dylan, give me head", "not computer related"),
+        Example("type good game in chat", "invalid command"),
+        Example("pause the youtube video", "invalid command"),
+        Example("skip this current song", "invalid command"),
+        Example("have sex with my mom", "invalid command"),
+        Example("Dylan, do something physical", "not computer related"),
+        Example("Dylan, do something virtual", "valid command")
     ]
 
-inputs = [input()]
-while inputs != ["stop"]:
+
+
+    temp_subject_list = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
+    data_command = []
+    data_subject = []
+    for subject in subject_list:
+        data_subject += [
+            Example(f"Dylan, please open {subject}", subject),
+            Example(f"Dylan, type {subject} for me", subject),
+            Example(f"Dylan, run {subject} quickly", subject),
+            Example(f"Dylan, message {subject} pleaeplease", subject),
+            Example(f"Dylan, please run {subject}", subject),
+            Example(f"Dylan, fuck {subject} around", subject),
+            Example(f"Dylan, get {subject}'s address", subject),
+            Example(f"Dylan, close {subject}'s windows", subject),
+            Example(f"Dylan, skip {subject} in the playlist", subject),
+
+        ]
+        data_command += [
+            Example(f"Dylan, open {subject} in my web browser", "open"),
+            Example(f"Dylan, open {subject} for me", "open"),
+            Example(f"Dylan, open {subject}", "open"),
+            Example(f"Dylan, please open {subject}", "open"),
+            Example(f"Dylan, open {subject} pleaseplaseplasea", "open"),
+            Example(f"Dylan, run {subject}", "open"),
+            Example(f"Dylan, run {subject}", "open"),
+            Example(f"Dylan, create a new {subject} tab something", "open"),
+
+            Example(f"Dylan, can you please open {subject}", "open"),
+            Example(f"Dylan, type {subject}", "type"),
+            Example(f"Dylan, can you type {subject}", "type"),
+            Example(f"Dylan, type {subject}", "type"),
+            Example("Dylan, please type a response in chat", "type"),
+            Example(f"Dylan, message {subject}", "type"),
+            Example(f"Dylan, reply to {subject}", "type"),
+            Example(f"Dylan, send {subject} a text message", "type"),
+            Example(f"dylsn, respond to {subject}", "type"),
+
+        ]
     validity = co.classify(
         inputs=inputs,
         examples=data_validity,
@@ -81,14 +81,15 @@ while inputs != ["stop"]:
         model="embed-english-light-v2.0"
 
     )
-    print(f"validity: {validity.classifications[0].prediction}")
-    print(f"confidence: {validity.classifications[0].confidence}")
+    return(
+        {
+            "validity": (validity.classifications[0].prediction, validity.classifications[0].confidence),
+            "command": (command.classifications[0].prediction, command.classifications[0].confidence),
+            "subject": (subject.classifications[0].prediction, subject.classifications[0].prediction),
 
-    print(f"command type: {command.classifications[0].prediction}")
-    print(f"confidence: {command.classifications[0].confidence}")
+        }
+    )
 
-    print(f"subject: {subject.classifications[0].prediction}")
-    print(f"confidence: {subject.classifications[0].confidence}")
 
-    inputs = [input()]
+
 
