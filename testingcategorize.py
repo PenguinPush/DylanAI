@@ -1,4 +1,4 @@
-from summarize import categorize
+from categorization import categorize
 
 subjects = ["Chrome", "Safari", "Spotify", "lunar client", "youtube", "task manager", "mother", "discord", "instagram", "@vickyqchu"]
 
