@@ -9,6 +9,8 @@ import numpy as np
 import openai
 import glob
 from scipy.io.wavfile import write
+from categorization import categorize
+import noisereduce
 
 openai.api_key = "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"
 
@@ -29,6 +31,12 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
     while True:
         text = result_queue.get()
         print(text)
+        if text.lower() != "stop" and text.lower() != "stop.":
+            if text != "" and text != " ":
+                categories = categorize(text)
+
+                for key, item in categories.items():
+                    print(f"{key}: {item}")
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
     #load the speech recognizer and set the initial energy threshold and pause threshold
@@ -37,18 +45,19 @@ def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir
     r.pause_threshold = 0.5
     r.non_speaking_duration = 0.5
 
-    with sr.Microphone(sample_rate=16000) as source:
+    with sr.Microphone(sample_rate=32000) as source:
         print("Model Loaded!")
         while True:
             audio = r.listen(source, phrase_time_limit=5)
             data = np.frombuffer(audio.frame_data, np.int16).flatten().astype(np.float32) / 32768.0
+            data = noisereduce.noisereduce.reduce_noise(y=data, sr=32000)
             Variables.filename = (f"temp{Variables.i}.wav")
             audio_data = Variables.filename
-            write(Variables.filename, 16000, data)
+            write(Variables.filename, 32000, data)
             audio_queue.put_nowait(audio_data)
 
-            if os.path.exists(f"temp{Variables.i - 2}.wav"):
-                os.remove(f"temp{Variables.i - 2}.wav")
+            if os.path.exists(f"temp{Variables.i - 5}.wav"):
+                os.remove(f"temp{Variables.i - 5}.wav")
 
             Variables.i += 1
             Variables.wav_checked = False
@@ -59,7 +68,7 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
         if os.path.exists(Variables.filename) and Variables.wav_checked == False:
             Variables.wav_checked = True
             audio_file = open(Variables.filename, "rb")
-            result = openai.Audio.transcribe("whisper-1", audio_file)
+            result = openai.Audio.transcribe("whisper-1", audio_file, prompt="Use context clues to generate the text. If something that sounds alike to 'Dylan' is said, correct it to 'Dylan'. The transcript is about making requests to a virtual assistant named Dylan. It asks for things such as launching or opening apps, so keep this in mind when deciding what words to use.")
             predicted_text = result["text"]
             result_queue.put_nowait(predicted_text)
 
