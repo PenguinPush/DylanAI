@@ -1,6 +1,6 @@
 import cohere
 from cohere.responses.classify import Example
-co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
+co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
 
 
 default_list_dict = {
