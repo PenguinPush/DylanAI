@@ -1,4 +1,0 @@
-
-.!ctkframe.!ctkframe.!canvas.!ctkscrollableframe.!ctkframe
-.!ctkframe.!ctkframe.!canvas.!ctkscrollableframe.!ctkframe2
-.!ctkframe.!ctkframe.!canvas.!ctkscrollableframe.!ctkframe3
