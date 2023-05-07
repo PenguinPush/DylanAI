@@ -16,6 +16,7 @@ from macros import read_info
 from chat import chat
 
 openai.api_key = "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"
+temp_dir = tempfile.mkdtemp()
 
 class Variables:
     i = 0

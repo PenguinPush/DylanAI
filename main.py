@@ -9,6 +9,7 @@ from menu_config import main_config
 import tempfile
 import glob
 from transcribe import main
+import multiprocessing
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
@@ -22,61 +23,20 @@ root.geometry("1280x960")
 class MainMenu():
     def __init__(self):
 
-        temp_dir = tempfile.mkdtemp()
-        for tempfilename in glob.glob("./temp*"):
-            os.remove(tempfilename)
-
-        r = sr.Recognizer()
-
-        with sr.Microphone() as source:
-            print("Please wait. Calibrating microphone...")
-            r.adjust_for_ambient_noise(source, duration=5)
-
-        main(model="base", device="cuda", english=True, verbose=False, energy=1000, dynamic_energy=True, pause=0.3,
-             save_file=False)
-
-        global toggleState
-        toggleState = "ON"
-
         barTop = tk.Frame(root, bg="#3C3744", height=0)
         barTop.pack(side="top", fill=tk.X)
 
         frame = ctk.CTkFrame(master=root)
         frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-        menuState = True
+        global toggleState
         toggleState = "ON"
-
-        def switch():
-            global menuState
-            if menuState is True:
-                for b in range(60):
-                    menuFrame.place(x=0, y=b * 3)
-                    barTop.update()
-
-                barTop.config(bg="#3C3744")
-                root.config(bg="#242424")
-
-                menuState = False
-
-            else:
-                barTop.config(bg="#3C3744")
-                root.config(bg="#242424")
-
-                for b in range(-60, 0):
-                    menuFrame.place(x=0, y=-b * 3)
-                    barTop.update()
-
-                menuState = True
 
         def hi():
             print("e")
 
         def import_menu_config():
             main_config()
-
-        def import_help_config():
-            main_help()
 
         menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1200)
         menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
@@ -125,5 +85,23 @@ class MainMenu():
         togglebutton = tk.Button(text=toggleState, font=("nexa heavy", 90), bg="#242424", fg="#42f584", activebackground="#3C3744", activeforeground="#42f584", bd=0, anchor=tk.CENTER, width=10, command=toggle)
         togglebutton.place(relx=0.5, rely=0.5, anchor=CENTER, width=500, height=200)
 
-MainMenu()
+        def run_transcribe():
+            # Call the transcribe function from the transcribe module
+            main(model="base", device="cuda", english=True, verbose=False, energy=1000, dynamic_energy=True, pause=0.3,
+                 save_file=False)
+        def start_transcribe_process():
+            # Start the speech recognition process in a separate process
+            for tempfilename in glob.glob("./temp*"):
+                os.remove(tempfilename)
+
+            r = sr.Recognizer()
+
+            with sr.Microphone() as source:
+                print("Please wait. Calibrating microphone...")
+                r.adjust_for_ambient_noise(source, duration=5)
+
+            multiprocessing.Process(target=run_transcribe).start()
+
+        root.after(100, start_transcribe_process())
+
 root.mainloop()
