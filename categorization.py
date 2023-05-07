@@ -81,6 +81,10 @@ def categorize(input, subject_list=default_list_dict.keys()):
             Example(f"Dylan, reply to {subject}", "type"),
             Example(f"Dylan, send {subject} a text message", "type"),
             Example(f"Dylan, respond to {subject}", "type"),
+            Example(f"Dylan, write {subject}", "type"),
+            Example(f"Dylan, can you write {subject}", "type"),
+            Example(f"Dylan, write {subject}", "type"),
+            Example("Dylan, please write a response in chat", "type"),
 
             Example(f"Dylan, search for {subject}", "search"),
             Example(f"Dylan, find mcdonalds locations near me", "search"),
