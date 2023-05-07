@@ -10,7 +10,7 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
 root = tk.Tk()
-root.title("DYLAN !!!!")
+root.title("DYLAN.AI")
 root.iconbitmap("bird_black.ico")
 root.config(bg="#242424")
 root.geometry("1280x960")
