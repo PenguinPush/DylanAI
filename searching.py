@@ -20,13 +20,13 @@ def search_results(search_term, results_number=3):
         results = None
 
     if results:
-        for result in results:
-            print(result['title'])
-            print(result['formattedUrl'])
-            if 'snippet' in result:
-                print(result['snippet'] + '\n')
-            else:
-                print('')
+        #for result in results:
+            #print(result['title'])
+            #print(result['formattedUrl'])
+            #if 'snippet' in result:
+                #print(result['snippet'] + '\n')
+            #else:
+                #print('')
         result_text = []
 
         for result in results:
@@ -67,7 +67,7 @@ def search_results(search_term, results_number=3):
                             ordered_results[i] = results[index]
                             ordered_results[i]['score'] = (score, index)
     else:
-        print("no search results")
+        #print("no search results")
         ordered_results = None
 
     return ordered_results

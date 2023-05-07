@@ -1,3 +1,5 @@
+import subprocess
+
 import speech_recognition as sr
 import whisper
 import queue
@@ -11,8 +13,7 @@ from scipy.io.wavfile import write
 from categorization import categorize
 from macros import read_info
 from chat import chat
-
-#import menu_main
+from menu_main import main_menu
 
 openai.api_key = "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"
 
@@ -81,6 +82,9 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
             result_queue.put_nowait(predicted_text)
 
 if __name__ == "__main__":
+
+    main_menu()
+
     temp_dir = tempfile.mkdtemp()
     for tempfilename in glob.glob("./temp*"):
         os.remove(tempfilename)
