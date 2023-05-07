@@ -12,7 +12,7 @@ root = ctk.CTk()
 root.title("DYLAN.AI")
 root.iconbitmap("bird_black.ico")
 root.config(bg="#242424")
-root.geometry("1280x960")
+root.geometry("720x480")
 
 filename = " "
 trigger=[]
