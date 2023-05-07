@@ -86,6 +86,7 @@ def toggle():
         toggleState = "ON"
 
 bird_image = Image.open("bird_white.png")
+bird_image = bird_image.resize((100, 90), Image.ANTIALIAS)
 bird_image_tk = ImageTk.PhotoImage(bird_image)
 
 bird_label = tk.Label(image=bird_image_tk)
