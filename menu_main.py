@@ -5,7 +5,6 @@ from tkinter import *
 from tkinter import filedialog
 from PIL import Image, ImageTk
 from menu_config import main_config
-from menu_help import main_help
 
 def main_menu():
     ctk.set_appearance_mode("dark")
@@ -75,11 +74,10 @@ def main_menu():
                     fg = but.cget("fg")
                     but.config(background=fg, foreground=bg)
 
-                but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#242424", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=20)
+                but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#242424", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=40)
                 but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=CENTER)
 
-            button(0,-300,0,import_menu_config)
-            button(1,300,0,import_help_config)
+            button(0,0,0,import_menu_config)
 
             def toggle():
                 global toggleState
