@@ -17,7 +17,7 @@ root.geometry("1280x960")
 
 barTop = tk.Frame(root, bg="#3C3744", height=0)
 barTop.pack(side="top", fill=tk.X)
-
+    
 frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
