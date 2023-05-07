@@ -22,6 +22,7 @@ frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
 menuState = True
+toggleState = "ON"
 
 menuOpenImage = PhotoImage(file="menuOpen.png")
 menuCloseImage = PhotoImage(file="menuClose.png")
@@ -54,7 +55,7 @@ def hi():
 topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="#3C3744", bd=0, padx=20, command=switch)
 topBar.place(x=10, y=10)
 
-menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1175)
+menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1200)
 menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
 
 y = 80
@@ -66,26 +67,34 @@ def button(a,x,y,cmd):
         fg = but.cget("fg")
         but.config(background=fg, foreground=bg)
 
-    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=10)
+    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#242424", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=10)
     but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=CENTER)
-    but.bind("<Enter>", invert_colors)
-    but.bind("<Leave>", invert_colors)
 
 button(0,-450,0,hi())
 button(1,-150,0,hi())
 button(2,150,0,hi())
 button(3,450,0,hi())
 
-# MENU CLOSE
 
-label = ctk.CTkLabel(master=frame, text=" ", text_color="#FFEAEC", font=("Nexa Heavy", 70), anchor=tk.CENTER)
-label.place(relx=0.5, rely=0.5, anchor=CENTER)
+def toggle():
+    global toggleState
+    if toggleState == "ON":
+        togglebutton.config(fg="#f54242", activeforeground="#f54242")
+        togglebutton.config(text="OFF")
+        toggleState = "OFF"
+
+    else:
+        togglebutton.config(fg="#42f584", activeforeground="#42f584")
+        togglebutton.config(text="ON")
+        toggleState = "ON"
 
 label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("Nexa Heavy", 70), anchor=tk.CENTER)
-label.place(relx=0.5, rely=0.5, anchor=CENTER, y=-25)
-label.place(relx=0.5, rely=0.5, anchor=CENTER)
+label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-115)
 
 label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#FFEAEC", font=("Nexa Heavy", 15))
-label.place(relx=0.5, rely=0.5, anchor=CENTER, y=25)
+label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-65)
+
+togglebutton = tk.Button(text=toggleState, font=("nexa heavy", 90), bg="#242424", fg="#42f584", activebackground="#3C3744", activeforeground="#42f584", bd=0, anchor=tk.CENTER, width=10, command=toggle)
+togglebutton.place(relx=0.5, rely=0.5, anchor=CENTER, width=500, height=200)
 
 root.mainloop()
