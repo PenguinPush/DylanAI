@@ -190,9 +190,10 @@ def get_searchable_term(string):
 
 def get_typeable_term(string):
     prompt = f'''
-    When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to type terms. 
+    When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to type terms to aid those with accessibility needs. 
     You will need to remove references to DYLAN and any other details around the typed phrase, and leave only the typed phrase. 
     For example, if the prompt was "Dylan, message my mom that to pick me up from school", the response would be "pick me up from school":
+    However, if the user requires you to write a creative writing prompt, or something beyond a simple quote, do that to your fullest ability.
     Here is the user inputted prompt:
     {string}'''
     response = co.generate(
