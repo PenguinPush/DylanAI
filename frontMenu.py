@@ -2,6 +2,7 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from PIL import ImageTk, Image
 import ctypes
 
 ctk.set_appearance_mode("dark")
@@ -27,7 +28,7 @@ menuCloseImage = PhotoImage(file="menuClose.png")
 def switch():
     global menuState
     if menuState is True:
-        for b in range(100):
+        for b in range(60):
             menuFrame.place(x=0, y=b * 3)
             barTop.update()
 
@@ -40,7 +41,7 @@ def switch():
         barTop.config(bg="#3C3744")
         root.config(bg="#242424")
 
-        for b in range(-100, 0):
+        for b in range(-60, 0):
             menuFrame.place(x=0, y=-b * 3)
             barTop.update()
 
@@ -53,7 +54,7 @@ topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="
 topBar.place(x=10, y=10)
 
 menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1175)
-menuFrame.place(relx=0.5, rely=0.8, anchor=CENTER)
+menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
 
 y = 80
 options = ["MENU", "CONFIG", "CHAT", "HELP"]
@@ -73,6 +74,8 @@ button(0,-450,0,hi())
 button(1,-150,0,hi())
 button(2,150,0,hi())
 button(3,450,0,hi())
+
+gradient =
 
 # MENU CLOSE
 
