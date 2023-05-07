@@ -6,9 +6,10 @@ import mouse
 import webbrowser
 import subprocess
 
-
 confidence_threshold = 0.8
 
+import cohere
+co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
 class VariablesMacros:
     valid = 0
     command = ""
@@ -69,7 +70,7 @@ def read_info(key, item, text):
                         type_term = get_typeable_term(text)
                         print(f"the typed term is: {type_term}")
                         keyboard.write(type_term)
-                else:
+                elif VariablesMacros.valid != 0:
                     response = co.chat(
                         query=text,
                         temperature=1,
@@ -86,4 +87,3 @@ def read_info(key, item, text):
                         else:
                             print(result['title'])
                             print(result['formattedUrl'] + '\n')
-
