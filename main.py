@@ -87,7 +87,6 @@ if __name__ == "__main__":
 
     main_menu()
 
-
     temp_dir = tempfile.mkdtemp()
     for tempfilename in glob.glob("./temp*"):
         os.remove(tempfilename)

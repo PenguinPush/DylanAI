@@ -32,7 +32,7 @@ def read_info(key, item, text):
                 VariablesMacros.command = item[0]
 
         case "subject":
-            if item[1] > confidence_threshold:
+            if True:
                 item_location = default_list_dict.get(item[0])
                 print(item_location)
 
