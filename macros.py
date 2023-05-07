@@ -57,16 +57,21 @@ def read_info(key, item, text):
                         print(get_searchable_term(text))
                         results = search_results(get_searchable_term(text), 3)
                         for result in results:
-                            print(result['title'])
-                            print(result['formattedUrl'] + '\n')
+                            if not result:
+                                break
+                            else:
+                                print(result['title'])
+                                print(result['formattedUrl'] + '\n')
 
             else:
                 if VariablesMacros.valid > 0:
                     print(get_searchable_term(text))
                     results = search_results(get_searchable_term(text), 3)
                     for result in results:
-                        print(result['title'])
-                        print(result['formattedUrl'] + '\n')
+                        if not result: break
+                        else:
+                            print(result['title'])
+                            print(result['formattedUrl'] + '\n')
 
 
 
