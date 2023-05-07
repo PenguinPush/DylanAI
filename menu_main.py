@@ -4,6 +4,8 @@ import os
 from tkinter import *
 from tkinter import filedialog
 from PIL import Image, ImageTk
+from menu_config import main_config
+from menu_help import main_help
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
@@ -55,13 +57,16 @@ class MainMenu():
             print("e")
 
         def import_menu_config():
-            import menu_config
+            main_config()
+
+        def import_help_config():
+            main_help()
 
         menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1200)
         menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
 
         y = 80
-        options = ["MENU", "CONFIG", "HELP"]
+        options = ["CONFIG", "HELP"]
         def button(a, x , y, cmd):
 
             def invert_colors(event):
@@ -69,12 +74,11 @@ class MainMenu():
                 fg = but.cget("fg")
                 but.config(background=fg, foreground=bg)
 
-            but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#242424", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=10)
+            but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#242424", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=20)
             but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=CENTER)
 
-        button(0,-300,0,hi())
-        button(1,0,0,import_menu_config)
-        button(2,300,0,hi())
+        button(0,-300,0,import_menu_config)
+        button(1,300,0,import_help_config)
 
         def toggle():
             global toggleState
