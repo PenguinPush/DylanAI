@@ -93,6 +93,9 @@ def categorize(input, subject_list=default_list_dict.keys()):
             Example(f"Dylan, look for a {subject}", "search"),
             Example(f"Dylan, browse for a {subject}", "search"),
             Example(f"Dylan, browse the web for {subject}", "search"),
+            Example(f"Dylan, look up {subject}", "search"),
+            Example(f"Dylan, Google {subject}", "search"),
+            Example(f"Dylan, surf for {subject}", "search"),
 
             Example(f"Dylan, update {subject}", "other"),
             Example(f"Dylan, configure {subject}", "other"),
