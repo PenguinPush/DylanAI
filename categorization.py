@@ -11,6 +11,7 @@ default_list_dict = {
 }
 
 def categorize(input, subject_list=default_list_dict.keys()):
+    co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
     inputs = [input]
     data_validity = [
         Example("Dylan, fetch me a water bottle", "not computer related"),
@@ -67,6 +68,9 @@ def categorize(input, subject_list=default_list_dict.keys()):
             Example(f"Dylan, run {subject}", "open"),
             Example(f"Dylan, create a new {subject} tab something", "open"),
             Example(f"Dylan, can you please open {subject}", "open"),
+            Example(f"Dylan, launch {subject} in my desktop", "open"),
+            Example(f"Dylan, start the proccess {subject}", "open"),
+      
 
             Example(f"Dylan, type {subject}", "type"),
             Example(f"Dylan, can you type {subject}", "type"),
@@ -118,6 +122,7 @@ def get_searchable_term(string):
     The following prompt is a user command to DYLAN, an ai system designed to search terms. 
     You will need to output a concise, searchable term based on the prompt below, removing any mentions of DYLAN, and just making it into search terms:
     {string}'''
+    co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
     response = co.generate(
         model='command-nightly',
         prompt=prompt,

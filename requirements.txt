@@ -7,4 +7,3 @@ scipy~=1.10.1
 cohere~=4.3.1
 keyboard~=0.13.5
 mouse~=0.7.1
-noisereduce~=2.0.1
