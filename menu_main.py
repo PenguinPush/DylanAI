@@ -59,9 +59,6 @@ def main_menu():
             def import_menu_config():
                 main_config()
 
-            def import_help_config():
-                main_help()
-
             menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1200)
             menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
 
