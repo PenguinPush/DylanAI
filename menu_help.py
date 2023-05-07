@@ -74,12 +74,14 @@ button(2,300,0,hi())
 #END
 
 
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI ", text_color="#FFEAEC", font=("Nexa Heavy", 140), anchor=tk.CENTER)
-label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-110)
+label = ctk.CTkLabel(master=frame, text="HELP", text_color="#FFEAEC", font=("Nexa Heavy", 140), anchor=tk.CENTER)
+label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-210)
 
+label = ctk.CTkLabel(master=frame, text="How do you use DYLAN.AI? ", text_color="#817A90", font=("Nexa Heavy", 20))
+label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-130)
 
-
-
+scroll = ctk.CTkScrollableFrame(master=frame,corner_radius=20, fg_color="#3C3744", width=900, height=300,scrollbar_button_color="#817A90",scrollbar_button_hover_color="#FFEAEC")
+scroll.place(relx=0.5, rely=0.5, anchor=CENTER, y=50)
 
 
 
