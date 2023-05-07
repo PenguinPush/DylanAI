@@ -17,38 +17,29 @@ class MenuManager(tk.Tk):
         self.iconbitmap("bird_black.ico")
         self.config(bg="#242424")
         self.geometry("1280x960")
-        container = tk.Frame(self)
-
-        container.pack(side="top", fill="both", expand=True)
-
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
+        container_main = tk.Frame(self)
 
         self.frames = {}
 
-        for F in (StartPage, PageOne, PageTwo):
-            frame = F(container, self)
+        for F in (MainMenu, ConfigMenu, PageTwo):
+            frame = F(container_main, self)
 
             self.frames[F] = frame
 
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(StartPage)
+        self.show_frame(MainMenu)
 
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
 
 
-class StartPage(tk.Frame):
-
+class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         global toggleState
         toggleState = "ON"
-
-        barTop = tk.Frame(controller, bg="#3C3744", height=0)
-        barTop.pack(side="top", fill=tk.X)
 
         frame = ctk.CTkFrame(master=controller)
         frame.pack(pady=20, padx=20, fill="both", expand=True)
@@ -71,7 +62,7 @@ class StartPage(tk.Frame):
             but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=CENTER)
 
         button(0, -300, 0, hi())
-        button(1, 0, 0, hi())
+        button(1, 0, 0, lambda: controller.show_frame(ConfigMenu))
         button(2, 300, 0, hi())
 
         def toggle():
@@ -109,21 +100,67 @@ class StartPage(tk.Frame):
         togglebutton.place(relx=0.5, rely=0.5, anchor=CENTER, width=500, height=200)
 
 
-class PageOne(tk.Frame):
-
+class ConfigMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
+        filename = " "
+        trigger = []
+        c = 0  # amount of inputs given
+        dataBase = open('custom_macros.txt', 'w')
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("green")
 
-        button1 = tk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button1.pack()
+        frame = ctk.CTkFrame(master=controller)
+        frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-        button2 = tk.Button(self, text="Page Two",
-                            command=lambda: controller.show_frame(PageTwo))
-        button2.pack()
+        label = ctk.CTkLabel(master=frame, text="MACRO LIST:", text_color="#FFEAEC", font=("nexa bold", 30))
+        label.pack(pady=(40, 20), padx=30)
 
+        scroll = ctk.CTkScrollableFrame(master=frame, corner_radius=20, fg_color="#3C3744", width=600, height=300,
+                                        scrollbar_button_color="#817A90", scrollbar_button_hover_color="#FFEAEC")
+        scroll.pack(pady=20, padx=0)
+
+        def add():
+            global c, filename
+
+            def browseFiles():
+                global filename
+                filename = filedialog.askopenfilename(initialdir="/",
+                                                      title="SELECT A FILE",
+                                                      filetypes=(("all files", "*.*"), ("txt files", "*.txt")))
+                x.configure(text=os.path.basename(filename))
+                filename = " "
+                return filename
+
+            frame = ctk.CTkFrame(scroll, fg_color="#3C3744")
+            frame.pack(pady=5, fill=ctk.X, expand=True)
+            x = ctk.CTkButton(frame, fg_color="#817A90", text=filename, text_color="#FFEAEC", font=("nexa bold", 20),
+                              border_width=0, state="readonly", command=browseFiles, anchor="w")
+            x.pack(side=ctk.LEFT, pady=10, padx=20, fill=ctk.BOTH, expand=True)
+            y = ctk.CTkEntry(frame, fg_color="#817A90", placeholder_text="Name", placeholder_text_color="#FFEAEC",
+                             text_color="#FFEAEC", font=("nexa bold", 20), border_width=0)
+            y.pack(side=ctk.LEFT, pady=10, padx=10, fill=ctk.BOTH, expand=True)
+            z = ctk.CTkCheckBox(frame, fg_color="#817A90", text="Run!", font=("nexa bold", 20), text_color="#FFEAEC",
+                                border_color="#817A90", checkbox_height=30,
+                                checkbox_width=30, border_width=4, hover_color="#817A90", onvalue=1, offvalue=0)
+            z.pack(padx=(10, 0), pady=10)
+            c += 1  # counter +1
+            trigger.append(frame)
+            dataBase.write('\n' + str(frame))
+
+        def delete():
+            global trigger
+            frame = trigger[len(trigger) - 1]
+            frame.destroy()
+            trigger = trigger[:len(trigger) - 1]
+
+        new = ctk.CTkButton(controller, fg_color="#3C3744", text="add", font=("nexa bold", 20), text_color="#FFEAEC",
+                            command=add)
+        new.pack(side=ctk.LEFT, padx=(40, 20), pady=(10, 30), fill=ctk.BOTH, expand=True)
+
+        delete = ctk.CTkButton(controller, fg_color="#3C3744", text="delete", font=("nexa bold", 20), text_color="#FFEAEC",
+                               command=delete)
+        delete.pack(side=ctk.LEFT, padx=(20, 40), pady=(10, 30), fill=ctk.BOTH, expand=True)
 
 class PageTwo(tk.Frame):
 
