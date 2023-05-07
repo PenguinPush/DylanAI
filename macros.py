@@ -69,7 +69,7 @@ def read_info(key, item, text):
                         type_term = get_typeable_term(text)
                         print(f"the typed term is: {type_term}")
                         keyboard.write(type_term)
-                else:
+                elif VariablesMacros.valid != 0:
                     response = co.chat(
                         query=text,
                         temperature=1,
