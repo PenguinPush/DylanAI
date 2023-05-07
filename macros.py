@@ -1,5 +1,4 @@
-from categorization import default_list_dict
-from categorization import get_searchable_term
+from categorization import default_list_dict, get_typeable_term, get_searchable_term
 from searching import search_results
 import os
 import keyboard
@@ -52,16 +51,23 @@ def read_info(key, item, text):
                         VariablesMacros.valid = False
                         VariablesMacros.command = ""
 
-                else:
+                elif VariablesMacros.valid == 1 and VariablesMacros.command == "search":
                     if VariablesMacros.valid > 0:
-                        print(get_searchable_term(text))
-                        results = search_results(get_searchable_term(text), 3)
+                        search_term = get_searchable_term(text)
+                        print(f"the searched term is: {search_term}")
+                        results = search_results(search_term, 3)
                         for result in results:
                             if not result:
                                 break
                             else:
                                 print(result['title'])
                                 print(result['formattedUrl'] + '\n')
+
+                elif VariablesMacros.valid == 1 and VariablesMacros.command == "type":
+                    if VariablesMacros.valid > 0:
+                        type_term = get_typeable_term(text)
+                        print(f"the typed term is: {type_term}")
+                        keyboard.write(type_term)
 
             else:
                 if VariablesMacros.valid > 0:
@@ -72,6 +78,4 @@ def read_info(key, item, text):
                         else:
                             print(result['title'])
                             print(result['formattedUrl'] + '\n')
-
-
 
