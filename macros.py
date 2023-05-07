@@ -48,11 +48,13 @@ def read_info(key, item, text):
                     subprocess.Popen(item_location)
                     VariablesMacros.valid = False
                     VariablesMacros.command = ""
+                    return f"Opening file at {item_location}..."
 
                 if subject_type == "url":
                     webbrowser.open(item_location)
                     VariablesMacros.valid = False
                     VariablesMacros.command = ""
+                    return f"Opening url {item_location}..."
 
             elif VariablesMacros.valid == 1 and VariablesMacros.command == "search":
                 search_term = get_searchable_term(text)
@@ -68,6 +70,7 @@ def read_info(key, item, text):
                     webbrowser.open(results[0]['link'])
                     VariablesMacros.valid = False
                     VariablesMacros.command = ""
+                return f"Searching for {search_term}..."
 
             elif VariablesMacros.valid == 1 and VariablesMacros.command == "type":
                 if VariablesMacros.valid != 0:

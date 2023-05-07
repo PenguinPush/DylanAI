@@ -11,13 +11,15 @@ import openai
 import glob
 from scipy.io.wavfile import write
 
+from menu_main import MainMenu
+
 import customtkinter as ctk
 import tkinter as tk
 import os
 from tkinter import *
 from tkinter import filedialog
 from PIL import Image, ImageTk
-from menu_config import main_config
+
 import tempfile
 import glob
 import multiprocessing
@@ -34,6 +36,7 @@ class Variables:
     i = 0
     filename = (f"temp{i}.wav")
     wav_checked = False
+    latestText = ""
     # will_output = True
 
 def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
@@ -55,6 +58,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
             else:
                 print("\n" + text)
                 categories = categorize(text)
+                MainMenu.update_label_text(MainMenu, text=text)
                 #chat(text)
 
                 for key, item in categories.items():
