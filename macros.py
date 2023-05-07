@@ -5,7 +5,6 @@ import keyboard
 import mouse
 import webbrowser
 import subprocess
-
 confidence_threshold = 0.8
 
 import cohere
@@ -33,7 +32,7 @@ def read_info(key, item, text):
                 VariablesMacros.command = item[0]
 
         case "subject":
-            if True:
+            if item[1] > confidence_threshold:
                 item_location = default_list_dict.get(item[0])
                 print(item_location)
 
@@ -54,7 +53,7 @@ def read_info(key, item, text):
                         VariablesMacros.command = ""
 
                 elif VariablesMacros.valid == 1 and VariablesMacros.command == "search":
-                    if VariablesMacros.valid > 0:
+                    if VariablesMacros.valid != 0:
                         search_term = get_searchable_term(text)
                         print(f"the searched term is: {search_term}")
                         results = search_results(search_term, 3)
@@ -70,24 +69,32 @@ def read_info(key, item, text):
                             VariablesMacros.command = ""
 
                 elif VariablesMacros.valid == 1 and VariablesMacros.command == "type":
-                    if VariablesMacros.valid > 0:
+                    if VariablesMacros.valid != 0:
                         type_term = get_typeable_term(text)
                         print(f"the typed term is: {type_term}")
                         keyboard.write(type_term)
                 elif VariablesMacros.valid != 0:
                     response = co.chat(
                         query=text,
-                        temperature=1,
+                        temperature=0.7,
                     )
                     print(response.text)
                     return response.text
 
             else:
-                if VariablesMacros.valid > 0:
-                    print(get_searchable_term(text))
-                    results = search_results(get_searchable_term(text), 3)
-                    for result in results:
-                        if not result: break
-                        else:
-                            print(result['title'])
-                            print(result['formattedUrl'] + '\n')
+                if VariablesMacros.valid != 0:
+
+                    response = co.chat(
+                        query=text,
+                        temperature=0.7,
+                    )
+                    print(response.text)
+                    return response.text
+
+#inpt = input()
+#categories = categorize(inpt)
+#for key, value in categories.items():
+#    read_info(key, value, inpt)
+#    print(f"{key}: {value}")
+
+
