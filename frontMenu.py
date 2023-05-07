@@ -17,7 +17,7 @@ root.geometry("1280x960")
 
 barTop = tk.Frame(root, bg="#3C3744", height=0)
 barTop.pack(side="top", fill=tk.X)
-    
+
 frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
@@ -56,7 +56,7 @@ menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1200)
 menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
 
 y = 80
-options = ["MENU", "CONFIG", "CHAT", "HELP"]
+options = ["MENU", "CONFIG", "HELP"]
 def button(a,x,y,cmd):
 
     def invert_colors(event):
@@ -67,10 +67,9 @@ def button(a,x,y,cmd):
     but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#242424", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=10)
     but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=CENTER)
 
-button(0,-450,0,hi())
-button(1,-150,0,hi())
-button(2,150,0,hi())
-button(3,450,0,hi())
+button(0,-300,0,hi())
+button(1,0,0,hi())
+button(2,300,0,hi())
 
 
 def toggle():
@@ -86,15 +85,15 @@ def toggle():
         toggleState = "ON"
 
 bird_image = Image.open("bird_white.png")
-bird_image = bird_image.resize((100, 90), Image.ANTIALIAS)
+bird_image = bird_image.resize((100, 100), Image.ANTIALIAS)
 bird_image_tk = ImageTk.PhotoImage(bird_image)
 
 bird_label = tk.Label(image=bird_image_tk)
 bird_label.image = bird_image_tk
 
-bird_label.place(relx=0.5, rely=0.4, anchor=CENTER, x=335, y=-105, width=100, height=90)
+bird_label.place(relx=0.5, rely=0.4, anchor=CENTER, x=365, y=-105, width=100, height=100)
 
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI ", text_color="#FFEAEC", font=("Nexa Heavy", 140), anchor=tk.CENTER)
+label = ctk.CTkLabel(master=frame, text="DYLAN.AI ", text_color="#FFEAEC", font=("Nexa Heavy", 140), anchor=tk.CENTER)
 label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-110)
 
 label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#817A90", font=("Nexa Heavy", 20))
