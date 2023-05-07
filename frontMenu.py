@@ -86,4 +86,13 @@ label.place(relx=0.5, rely=0.5, anchor=CENTER)
 label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#FFEAEC", font=("Nexa Heavy", 15))
 label.place(relx=0.5, rely=0.5, anchor=CENTER, y=25)
 
+
+def get_value(val):
+    print(val)
+
+
+slider = tk.Scale(root, from_=0, to=100, orient='horizontal', command=get_value)
+slider.pack(pady=20)
+
+
 root.mainloop()
