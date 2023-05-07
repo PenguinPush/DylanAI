@@ -7,9 +7,6 @@ import ctypes
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
-# MENU START
-color = {"nero": "#252726", "orange": "#FF8700", "darkorange": "#FE6101"}
-
 root = tk.Tk()
 root.title("DYLAN !!!!")
 root.iconbitmap("bird_black.ico")
@@ -38,8 +35,8 @@ def switch():
         root.config(bg="#242424")
 
         menuState = False
+
     else:
-       
         barTop.config(bg="#3C3744")
         root.config(bg="#242424")
 
@@ -55,9 +52,8 @@ def hi():
 topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="#3C3744", bd=0, padx=20, command=switch)
 topBar.place(x=10, y=10)
 
-menuFrame = tk.Frame(root, bg="#242424", height=300, width=2000)
+menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=2000)
 menuFrame.place(relx=0.5, rely=0.8, anchor=CENTER)
-tk.Label(menuFrame, font="Bahnschrift 15", bg="#817A90", fg="#3C3744", height=2, width=300, padx=20).place(x=0, y=-4)
 
 y = 80
 options = ["MENU", "CONFIG", "CHAT", "HELP"]
@@ -68,7 +64,7 @@ def button(a,x,y,cmd):
         fg = but.cget("fg")
         but.config(background=fg, foreground=bg)
 
-    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0,command=cmd,anchor=tk.CENTER, width=9)
+    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=9)
     but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=S)
     but.bind("<Enter>", invert_colors)
     but.bind("<Leave>", invert_colors)
@@ -77,9 +73,6 @@ button(0,-450,100,hi())
 button(1,-150,100,hi())
 button(2,150,100,hi())
 button(3,450,100,hi())
-
-menuClose = tk.Button(menuFrame, image=menuCloseImage, bg="#817A90", fg="#817A90", activebackground="#817A90", activeforeground="#FFEAEC", bd=0, command=switch)
-menuClose.place(x=10, y=10)
 
 # MENU CLOSE
 
