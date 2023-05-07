@@ -1,3 +1,4 @@
+import PIL.ImageTk
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import *
@@ -74,8 +75,6 @@ button(0,-450,0,hi())
 button(1,-150,0,hi())
 button(2,150,0,hi())
 button(3,450,0,hi())
-
-gradient =
 
 # MENU CLOSE
 
