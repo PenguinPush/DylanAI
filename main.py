@@ -36,7 +36,7 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
         else:
             print("\n" + text)
             categories = categorize(text)
-            chat(text)
+            #chat(text)
 
             for key, item in categories.items():
                 read_info(key, item, text)
