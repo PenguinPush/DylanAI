@@ -81,8 +81,24 @@ def main_help():
     label = ctk.CTkLabel(master=frame, text="How do you use DYLAN.AI? ", text_color="#817A90", font=("Nexa Heavy", 20))
     label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-130)
 
+<<<<<<< Updated upstream
     scroll = ctk.CTkScrollableFrame(master=frame,corner_radius=20, fg_color="#3C3744", width=900, height=300,scrollbar_button_color="#817A90",scrollbar_button_hover_color="#FFEAEC")
     scroll.place(relx=0.5, rely=0.5, anchor=CENTER, y=50)
+=======
+scroll = ctk.CTkScrollableFrame(label_text="""
+                                What is DYLAN.AI?
+                                
+                                Dylan.AI,Dynamic Yielding Language and Automated Navigation - Artificial Intelligence, is an AI-Driven tool to perform certain actions that would be impossible normally.
+                                It takes input through voice commands in the mic, parses it into a command for the computer, and executes the command. 
+
+
+                                """, master=frame,corner_radius=20, fg_color="#3C3744", width=900, height=300,scrollbar_button_color="#817A90",scrollbar_button_hover_color="#FFEAEC")
+                                
+                                
+
+
+scroll.place(relx=0.5, rely=0.5, anchor=CENTER, y=50)
+>>>>>>> Stashed changes
 
 
 
