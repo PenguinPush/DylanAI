@@ -203,7 +203,7 @@ def get_typeable_term(string):
     terms = response.generations[0].text
     return terms
 
-while True:
-    inpt = input()
-    print(get_typeable_term(inpt))
-    print(get_searchable_term(inpt))
+#while True:
+    #inpt = input()
+    #print(get_typeable_term(inpt))
+    #print(get_searchable_term(inpt))
