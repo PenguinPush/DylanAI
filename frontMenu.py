@@ -15,7 +15,7 @@ root.iconbitmap("bird_black.ico")
 root.config(bg="#242424")
 root.geometry("1280x960")
 
-barTop = tk.Frame(root, bg="#3C3744", height=50)
+barTop = tk.Frame(root, bg="#3C3744", height=0)
 barTop.pack(side="top", fill=tk.X)
 
 frame = ctk.CTkFrame(master=root)
@@ -52,9 +52,6 @@ def switch():
 def hi():
     print("e")
 
-topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="#3C3744", bd=0, padx=20, command=switch)
-topBar.place(x=10, y=10)
-
 menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1200)
 menuFrame.place(relx=0.5, rely=0.9, anchor=CENTER)
 
@@ -88,11 +85,19 @@ def toggle():
         togglebutton.config(text="ON")
         toggleState = "ON"
 
-label = ctk.CTkLabel(master=frame, text="DYLAN.AI", text_color="#FFEAEC", font=("Nexa Heavy", 70), anchor=tk.CENTER)
-label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-115)
+bird_image = Image.open("bird_white.png")
+bird_image_tk = ImageTk.PhotoImage(bird_image)
 
-label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#FFEAEC", font=("Nexa Heavy", 15))
-label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-65)
+bird_label = tk.Label(image=bird_image_tk)
+bird_label.image = bird_image_tk
+
+bird_label.place(relx=0.5, rely=0.4, anchor=CENTER, x=335, y=-105, width=100, height=90)
+
+label = ctk.CTkLabel(master=frame, text="DYLAN.AI ", text_color="#FFEAEC", font=("Nexa Heavy", 140), anchor=tk.CENTER)
+label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-110)
+
+label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#817A90", font=("Nexa Heavy", 20))
+label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-35)
 
 togglebutton = tk.Button(text=toggleState, font=("nexa heavy", 90), bg="#242424", fg="#42f584", activebackground="#3C3744", activeforeground="#42f584", bd=0, anchor=tk.CENTER, width=10, command=toggle)
 togglebutton.place(relx=0.5, rely=0.5, anchor=CENTER, width=500, height=200)
