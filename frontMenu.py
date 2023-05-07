@@ -28,7 +28,7 @@ def switch():
     global menuState
     if menuState is True:
         for b in range(100):
-            menuFrame.place(x=0, y=b * 5)
+            menuFrame.place(x=0, y=b * 3)
             barTop.update()
 
         barTop.config(bg="#3C3744")
@@ -41,7 +41,7 @@ def switch():
         root.config(bg="#242424")
 
         for b in range(-100, 0):
-            menuFrame.place(x=0, y=-b * 5)
+            menuFrame.place(x=0, y=-b * 3)
             barTop.update()
 
         menuState = True
@@ -52,7 +52,7 @@ def hi():
 topBar = tk.Button(barTop, image=menuOpenImage, bg="#3C3744", activebackground="#3C3744", bd=0, padx=20, command=switch)
 topBar.place(x=10, y=10)
 
-menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=2000)
+menuFrame = tk.Frame(root, bg="#3C3744", height=100, width=1175)
 menuFrame.place(relx=0.5, rely=0.8, anchor=CENTER)
 
 y = 80
