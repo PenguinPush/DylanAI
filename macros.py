@@ -78,9 +78,9 @@ def read_info(key, item, text):
                     response = co.chat(
                         query=text,
                         temperature=1,
-                        conversation_id=convo_id
                     )
                     print(response.text)
+                    return response.text
 
             else:
                 if VariablesMacros.valid > 0:
