@@ -28,11 +28,13 @@ from chat import chat
 
 openai.api_key = "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"
 
+will_output = True
+
 class Variables:
     i = 0
     filename = (f"temp{i}.wav")
     wav_checked = False
-    will_output = True
+    # will_output = True
 
 def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
     audio_model = whisper.load_model(model).to(device)
@@ -44,7 +46,8 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
                      args=(audio_queue, result_queue, audio_model, english, verbose, save_file)).start()
 
     while True:
-        if Variables.will_output == True:
+        print(will_output)
+        if will_output == True:
             text = result_queue.get()
             Variables.latestText = text
             if text == "" or text == " ":
@@ -96,16 +99,17 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
 
 def change_output(bool):
     if bool:
-        Variables.will_output = True
+        will_output = True
     else:
-        print("off")
-        Variables.will_output = False
+        # print("off2")
+        will_output = False
+        # print(Variables.will_output)
 
 if __name__ == "__main__":
 
     temp_dir = tempfile.mkdtemp()
     for tempfilename in glob.glob("./temp*"):
-        os.remove(tempfilename)
+         os.remove(tempfilename)
 
     r = sr.Recognizer()
 

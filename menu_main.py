@@ -97,13 +97,14 @@ class MainMenu():
     def toggle(self):
         # global toggleState
         if self.toggleState == "ON":
-            # print("off")
+            print("off")
             self.togglebutton.config(fg="#f54242", activeforeground="#f54242")
             self.togglebutton.config(text="OFF")
             self.toggleState = "OFF"
             change_output(False)
 
         else:
+            print("on")
             self.togglebutton.config(fg="#42f584", activeforeground="#42f584")
             self.togglebutton.config(text="ON")
             self.toggleState = "ON"
