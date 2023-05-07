@@ -64,15 +64,15 @@ def button(a,x,y,cmd):
         fg = but.cget("fg")
         but.config(background=fg, foreground=bg)
 
-    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=9)
-    but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=S)
+    but = tk.Button(menuFrame, text=options[a], font=("nexa bold", 30), bg="#3C3744", fg="#817A90", activebackground="#3C3744", activeforeground="#FFEAEC", bd=0, command=cmd, anchor=tk.CENTER, width=10)
+    but.place(rely=0.5, relx=0.5, x=x, y=y, anchor=CENTER)
     but.bind("<Enter>", invert_colors)
     but.bind("<Leave>", invert_colors)
 
-button(0,-450,100,hi())
-button(1,-150,100,hi())
-button(2,150,100,hi())
-button(3,450,100,hi())
+button(0,-450,0,hi())
+button(1,-150,0,hi())
+button(2,150,0,hi())
+button(3,450,0,hi())
 
 # MENU CLOSE
 
@@ -85,14 +85,5 @@ label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#FFEAEC", font=("Nexa Heavy", 15))
 label.place(relx=0.5, rely=0.5, anchor=CENTER, y=25)
-
-
-def get_value(val):
-    print(val)
-
-
-slider = tk.Scale(root, from_=0, to=100, orient='horizontal', command=get_value)
-slider.pack(pady=20)
-
 
 root.mainloop()
