@@ -20,7 +20,6 @@ from PIL import Image, ImageTk
 from menu_config import main_config
 import tempfile
 import glob
-from transcribe import main
 import multiprocessing
 
 from categorization import categorize
@@ -33,6 +32,7 @@ class Variables:
     i = 0
     filename = (f"temp{i}.wav")
     wav_checked = False
+    will_output = True
 
 def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
     audio_model = whisper.load_model(model).to(device)
@@ -44,18 +44,19 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
                      args=(audio_queue, result_queue, audio_model, english, verbose, save_file)).start()
 
     while True:
-        text = result_queue.get()
-        Variables.latestText = text
-        if text == "" or text == " ":
-            print()
-        else:
-            print("\n" + text)
-            categories = categorize(text)
-            #chat(text)
+        if Variables.will_output == True:
+            text = result_queue.get()
+            Variables.latestText = text
+            if text == "" or text == " ":
+                print()
+            else:
+                print("\n" + text)
+                categories = categorize(text)
+                #chat(text)
 
-            for key, item in categories.items():
-                read_info(key, item, text)
-                print(f"{key}: {item}")
+                for key, item in categories.items():
+                    read_info(key, item, text)
+                    print(f"{key}: {item}")
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
@@ -92,6 +93,13 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
             result = openai.Audio.transcribe("whisper-1", audio_file)
             predicted_text = result["text"]
             result_queue.put_nowait(predicted_text)
+
+def change_output(bool):
+    if bool:
+        Variables.will_output = True
+    else:
+        print("off")
+        Variables.will_output = False
 
 if __name__ == "__main__":
 
