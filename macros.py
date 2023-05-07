@@ -58,12 +58,16 @@ def read_info(key, item, text):
                         search_term = get_searchable_term(text)
                         print(f"the searched term is: {search_term}")
                         results = search_results(search_term, 3)
-                        for result in results:
-                            if not result:
-                                break
-                            else:
-                                print(result['title'])
-                                print(result['formattedUrl'] + '\n')
+                        if results:
+                            for result in results:
+                                if not result:
+                                    break
+                                else:
+                                    print(result['title'])
+                                    print(result['formattedUrl'] + '\n')
+                            webbrowser.open(results[0]['link'])
+                            VariablesMacros.valid = False
+                            VariablesMacros.command = ""
 
                 elif VariablesMacros.valid == 1 and VariablesMacros.command == "type":
                     if VariablesMacros.valid > 0:
