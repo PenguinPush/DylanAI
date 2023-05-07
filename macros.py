@@ -6,6 +6,7 @@ import mouse
 import webbrowser
 import subprocess
 
+
 confidence_threshold = 0.8
 
 class VariablesMacros:
