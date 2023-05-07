@@ -1,17 +1,20 @@
 import cohere
 from cohere.responses.classify import Example
 co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
+commands = {"typing", "open app", "other"}
 
 
 default_list_dict = {
+    "Chrome": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s",
     "Youtube": "https://youtube.com",
-    "Google Translate": "https://translate.google.com/",
-    "File Explorer": "C:\Windows\explorer.exe",
+    "Google Trasnlate": "https://translate.google.com/",
+    "File explorer": "C:\Windows\explorer.exe",
     "Notepad": "C:\Windows\\notepad.exe"
 }
+browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list_dict.keys()):
-    co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
+
     inputs = [input]
     data_validity = [
         Example("Dylan, fetch me a water bottle", "not computer related"),
@@ -61,16 +64,14 @@ def categorize(input, subject_list=default_list_dict.keys()):
         ]
         data_command += [
             Example(f"Dylan, open {subject} in my web browser", "open"),
-            Example(f"Dylan, run {subject} for me", "open"),
+            Example(f"Dylan, open {subject} for me", "open"),
             Example(f"Dylan, open {subject}", "open"),
             Example(f"Dylan, please open {subject}", "open"),
-            Example(f"Dylan, open {subject}", "open"),
+            Example(f"Dylan, open {subject} pleaseplaseplasea", "open"),
+            Example(f"Dylan, run {subject}", "open"),
             Example(f"Dylan, run {subject}", "open"),
             Example(f"Dylan, create a new {subject} tab something", "open"),
             Example(f"Dylan, can you please open {subject}", "open"),
-            Example(f"Dylan, launch {subject} in my desktop", "open"),
-            Example(f"Dylan, start the proccess {subject}", "open"),
-      
 
             Example(f"Dylan, type {subject}", "type"),
             Example(f"Dylan, can you type {subject}", "type"),
@@ -82,14 +83,67 @@ def categorize(input, subject_list=default_list_dict.keys()):
             Example(f"Dylan, respond to {subject}", "type"),
 
             Example(f"Dylan, search for {subject}", "search"),
-            Example(f"Dylan, find {subject} locations near me", "search"),
+            Example(f"Dylan, find mcdonalds locations near me", "search"),
             Example(f"Dylan, locate {subject}", "search"),
-            Example(f"Dylan, find me a {subject}", "search"),
+            Example(f"Dylan, find me a {subject} online", "search"),
             Example(f"Dylan, look for a {subject}", "search"),
             Example(f"Dylan, browse for a {subject}", "search"),
             Example(f"Dylan, browse the web for {subject}", "search"),
-            Example(f"Dylan, look up {subject}", "search"),
-            Example(f"Dylan, Google {subject}", "search"),
+
+            Example(f"Dylan, update {subject}", "other"),
+            Example(f"Dylan, configure {subject}", "other"),
+            Example(f"Dylan, troubleshoot {subject}", "other"),
+            Example(f"Dylan, customize {subject}", "other"),
+            Example(f"Dylan, analyze {subject}", "other"),
+            Example(f"Dylan, organize {subject}", "other"),
+            Example(f"Dylan, schedule {subject}", "other"),
+            Example(f"Dylan, backup {subject}", "other"),
+            Example(f"Dylan, restore {subject}", "other"),
+            Example(f"Dylan, export {subject}", "other"),
+            Example(f"Dylan, import {subject}", "other"),
+            Example(f"Dylan, record {subject}", "other"),
+            Example(f"Dylan, stream {subject}", "other"),
+            Example(f"Dylan, broadcast {subject}", "other"),
+            Example(f"Dylan, stop {subject}", "other"),
+            Example(f"Dylan, shuffle {subject}", "other"),
+            Example(f"Dylan, repeat {subject}", "other"),
+            Example(f"Dylan, skip {subject}", "other"),
+            Example(f"Dylan, rewind {subject}", "other"),
+            Example(f"Dylan, fast forward {subject}", "other"),
+            Example(f"Dylan, delete {subject}", "other"),
+            Example(f"Dylan, clear {subject}", "other"),
+            Example(f"Dylan, undo {subject}", "other"),
+            Example(f"Dylan, redo {subject}", "other"),
+            Example(f"Dylan, resize {subject}", "other"),
+            Example(f"Dylan, rotate {subject}", "other"),
+            Example(f"Dylan, crop {subject}", "other"),
+
+            Example("Dylan, lift {subject}", "other"),
+            Example("Dylan, throw {subject}", "other"),
+            Example("Dylan, run with {subject}", "other"),
+            Example("Dylan, kick {subject}", "other"),
+            Example("Dylan, catch {subject}", "other"),
+            Example("Dylan, climb {subject}", "other"),
+            Example("Dylan, balance {subject}", "other"),
+            Example("Dylan, jump over {subject}", "other"),
+            Example("Dylan, swim across {subject}", "other"),
+            Example("Dylan, ride {subject}", "other"),
+            Example("Dylan, drive {subject}", "other"),
+            Example("Dylan, fly {subject}", "other"),
+            Example("Dylan, walk on {subject}", "other"),
+            Example("Dylan, punch {subject}", "other"),
+            Example("Dylan, dance with {subject}", "other"),
+            Example("Dylan, exercise with {subject}", "other"),
+            Example("Dylan, hug {subject}", "other"),
+            Example("Dylan, kiss {subject}", "other"),
+            Example("Dylan, high-five {subject}", "other"),
+            Example("Dylan, shake hands with {subject}", "other"),
+            Example("Dylan, massage {subject}", "other"),
+            Example("Dylan, feed {subject}", "other"),
+            Example("Dylan, pet {subject}", "other"),
+            Example("Dylan, water {subject}", "other"),
+            Example("Dylan, paint {subject}", "other"),
+            Example("Dylan, carve {subject}", "other")
         ]
 
     validity = co.classify(
@@ -117,12 +171,15 @@ def categorize(input, subject_list=default_list_dict.keys()):
         }
     )
 
+
+
 def get_searchable_term(string):
     prompt = f'''
-    The following prompt is a user command to DYLAN, an ai system designed to search terms. 
+    When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to search terms. 
     You will need to output a concise, searchable term based on the prompt below, removing any mentions of DYLAN, and just making it into search terms:
+    For example, if the prompt was "Dylan, search a merry go round of life piano sheet music arrangement", the response would be "merry go round of life piano arrangement"
+    Here is the user inputted prompt:
     {string}'''
-    co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
     response = co.generate(
         model='command-nightly',
         prompt=prompt,
@@ -131,3 +188,22 @@ def get_searchable_term(string):
     terms = response.generations[0].text
     return terms
 
+def get_typeable_term(string):
+    prompt = f'''
+    When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to type terms. 
+    You will need to remove references to DYLAN and any other details around the typed phrase, and leave only the typed phrase. 
+    For example, if the prompt was "Dylan, message my mom that to pick me up from school", the response would be "pick me up from school":
+    Here is the user inputted prompt:
+    {string}'''
+    response = co.generate(
+        model='command-nightly',
+        prompt=prompt,
+        max_tokens=200,
+        temperature=0)
+    terms = response.generations[0].text
+    return terms
+
+while True:
+    inpt = input()
+    print(get_typeable_term(inpt))
+    print(get_searchable_term(inpt))
