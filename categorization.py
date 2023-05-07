@@ -180,8 +180,7 @@ def categorize(input, subject_list=default_list_dict.keys()):
 def get_searchable_term(string):
     prompt = f'''
     When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to search terms. 
-    You will need to output a concise, searchable term based on the prompt below, removing any mentions of DYLAN, and just making it into search terms:
-    For example, if the prompt was "Dylan, search a merry go round of life piano sheet music arrangement", the response would be "merry go round of life piano arrangement"
+    You will need to output a concise, searchable term based on the prompt below, removing any mentions of DYLAN, and just making it into a searchable message:
     Here is the user inputted prompt:
     {string}'''
     response = co.generate(
