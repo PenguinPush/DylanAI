@@ -71,14 +71,3 @@ def search_results(search_term, results_number=3):
         ordered_results = None
 
     return ordered_results
-
-while True:
-    search = input()
-    for result in search_results(search):
-        print(result['title'])
-        print(result['formattedUrl'])
-        print(result['score'])
-        if 'snippet' in result:
-            print(result['snippet'] + '\n')
-        else:
-            print()

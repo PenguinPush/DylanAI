@@ -12,7 +12,7 @@ from categorization import categorize
 from macros import read_info
 from chat import chat
 
-import menu_main
+#import menu_main
 
 openai.api_key = "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"
 
