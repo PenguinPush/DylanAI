@@ -1,5 +1,4 @@
 import subprocess
-
 import speech_recognition as sr
 import whisper
 import queue
@@ -10,8 +9,6 @@ import numpy as np
 import openai
 import glob
 from scipy.io.wavfile import write
-
-from menu_main import MainMenu
 
 import customtkinter as ctk
 import tkinter as tk
@@ -28,9 +25,8 @@ from categorization import categorize
 from macros import read_info
 from chat import chat
 
-openai.api_key = "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"
+openai.api_key = "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"
 
-will_output = True
 
 class Variables:
     i = 0
@@ -49,21 +45,19 @@ def main(model, english,verbose, energy, pause,dynamic_energy,save_file,device):
                      args=(audio_queue, result_queue, audio_model, english, verbose, save_file)).start()
 
     while True:
-        print(will_output)
-        if will_output == True:
-            text = result_queue.get()
-            Variables.latestText = text
-            if text == "" or text == " ":
-                print()
-            else:
-                print("\n" + text)
-                categories = categorize(text)
-                MainMenu.update_label_text(MainMenu, text=text)
-                #chat(text)
+        text = result_queue.get()
+        Variables.latestText = text
+        if text == "" or text == " ":
+            print()
+        else:
+            print("You said: \n" + text)
+            categories = categorize(text)
+            #chat(text)
 
-                for key, item in categories.items():
-                    read_info(key, item, text)
-                    print(f"{key}: {item}")
+            for key, item in categories.items():
+                read_info(key, item, text)
+                print(f"{key}: {item}")
+
 
 
 def record_audio(audio_queue, energy, pause, dynamic_energy, save_file, temp_dir):
