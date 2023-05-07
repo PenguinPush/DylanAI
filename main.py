@@ -10,6 +10,8 @@ import numpy as np
 import openai
 import glob
 from scipy.io.wavfile import write
+
+import menu_main
 from categorization import categorize
 from macros import read_info
 from chat import chat
@@ -84,6 +86,7 @@ def transcribe_forever(audio_queue, result_queue, audio_model, english, verbose,
 if __name__ == "__main__":
 
     main_menu()
+
 
     temp_dir = tempfile.mkdtemp()
     for tempfilename in glob.glob("./temp*"):
