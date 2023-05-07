@@ -10,8 +10,10 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 color = {"white": "#FFEAEC"}
 root = ctk.CTk()
-root.title("HI FIRENDS")
-root.geometry("800x600")
+root.title("DYLAN.AI")
+root.iconbitmap("bird_black.ico")
+root.config(bg="#242424")
+root.geometry("1280x960")
 c=0  # amount of inputs given
 dataBase = open('custom_macros.txt', 'w')
 ctk.set_appearance_mode("dark")
@@ -20,15 +22,10 @@ ctk.set_default_color_theme("green")
 color = {"white": "#FFEAEC"}
 color = {"blackk": "#3C3744"}
 
-
-
-root = ctk.CTk()
-root.geometry("800x600")
-
 frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-label = ctk.CTkLabel(master=frame, text="Macro list:", text_color="#FFEAEC", font=("nexa bold", 30))
+label = ctk.CTkLabel(master=frame, text="MACRO LIST:", text_color="#FFEAEC", font=("nexa bold", 30))
 label.pack(pady=(40,20), padx=30)
 
 scroll = ctk.CTkScrollableFrame(master=frame,corner_radius=20, fg_color="#3C3744", width=600, height=300,scrollbar_button_color="#817A90",scrollbar_button_hover_color="#FFEAEC")
@@ -40,7 +37,7 @@ def add():
     def browseFiles():
         global filename
         filename = filedialog.askopenfilename(initialdir = "/",
-                                          title = "Select a File",
+                                          title = "SELECT A FILE",
                                           filetypes = (("all files", "*.*"),("txt files", "*.txt")))
         x.configure(text=os.path.basename(filename))
         filename = " "

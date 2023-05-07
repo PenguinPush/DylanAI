@@ -5,7 +5,7 @@
 # from the tkinter library
 from tkinter import *
   
-# import filedialog module
+# mport filedialog module
 from tkinter import filedialog
   
 # Function for opening the

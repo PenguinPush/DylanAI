@@ -10,7 +10,7 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
 root = tk.Tk()
-root.title("DYLAN !!!!")
+root.title("DYLAN.AI")
 root.iconbitmap("bird_black.ico")
 root.config(bg="#242424")
 root.geometry("1280x960")
@@ -71,35 +71,16 @@ button(0,-300,0,hi())
 button(1,0,0,hi())
 button(2,300,0,hi())
 
+#END
 
-def toggle():
-    global toggleState
-    if toggleState == "ON":
-        togglebutton.config(fg="#f54242", activeforeground="#f54242")
-        togglebutton.config(text="OFF")
-        toggleState = "OFF"
-
-    else:
-        togglebutton.config(fg="#42f584", activeforeground="#42f584")
-        togglebutton.config(text="ON")
-        toggleState = "ON"
-
-bird_image = Image.open("bird_white.png")
-bird_image = bird_image.resize((100, 100), Image.ANTIALIAS)
-bird_image_tk = ImageTk.PhotoImage(bird_image)
-
-bird_label = tk.Label(image=bird_image_tk)
-bird_label.image = bird_image_tk
-
-bird_label.place(relx=0.5, rely=0.4, anchor=CENTER, x=365, y=-105, width=100, height=100)
 
 label = ctk.CTkLabel(master=frame, text="DYLAN.AI ", text_color="#FFEAEC", font=("Nexa Heavy", 140), anchor=tk.CENTER)
 label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-110)
 
-label = ctk.CTkLabel(master=frame, text="Dynamic Yielding Language and Automated Navigation", text_color="#817A90", font=("Nexa Heavy", 20))
-label.place(relx=0.5, rely=0.4, anchor=CENTER, y=-35)
 
-togglebutton = tk.Button(text=toggleState, font=("nexa heavy", 90), bg="#242424", fg="#42f584", activebackground="#3C3744", activeforeground="#42f584", bd=0, anchor=tk.CENTER, width=10, command=toggle)
-togglebutton.place(relx=0.5, rely=0.5, anchor=CENTER, width=500, height=200)
+
+
+
+
 
 root.mainloop()
