@@ -2,9 +2,9 @@ from googleapiclient.discovery import build
 import pprint
 import cohere
 
-co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
-my_api_key = "AIzaSyCcljAuCPGhz7jdA8u_KPQYNnPUeiYZ3sU"
-my_cse_id = "b1e865d1c0a764b9a"
+co = cohere.Client('cohere apikey')
+my_api_key = "google apikey"
+my_cse_id = "cse id"
 
 
 def google_search(search_term, api_key, cse_id, **kwargs):
