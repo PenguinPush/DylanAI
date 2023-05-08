@@ -10,7 +10,7 @@ confidence_threshold = 0.8
 
 import cohere
 
-co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
+co = cohere.Client('cohere apikey')
 
 
 class VariablesMacros:
