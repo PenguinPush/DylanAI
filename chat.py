@@ -1,5 +1,5 @@
 import cohere
-co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
+co = cohere.Client('cohere apikey')
 
 def chat(input):
     response = co.chat(query=input, temperature=0.8)
