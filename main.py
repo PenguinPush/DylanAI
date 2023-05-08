@@ -25,7 +25,7 @@ from categorization import categorize
 from macros import read_info
 from chat import chat
 
-openai.api_key = "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"
+openai.api_key = "openai apikey"
 
 
 class Variables:
