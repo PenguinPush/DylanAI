@@ -1,6 +1,6 @@
 import cohere
 from cohere.responses.classify import Example
-co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
+co = cohere.Client('cohere apikey')
 commands = {"typing", "open app", "other"}
 
 
@@ -13,7 +13,7 @@ default_list_dict = {
 browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 def categorize(input, subject_list=default_list_dict.keys()):
-    co = cohere.Client('KOhEHVjWjfwcwObuwb0KuGhbfSlUEAf6oYYJqlJN')
+    co = cohere.Client('cohere apikey')
     inputs = [input]
     data_validity = [
         Example("Dylan, fetch me a water bottle", "not computer related"),
@@ -125,7 +125,7 @@ def categorize(input, subject_list=default_list_dict.keys()):
 
 
 def get_searchable_term(string):
-    co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
+    co = cohere.Client('cohere apikey')
     prompt = f'''
     When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to search terms. 
     You will need to output a concise, searchable term based on the prompt below, removing any mentions of DYLAN, and just making it into a searchable message:
@@ -140,7 +140,7 @@ def get_searchable_term(string):
     return terms
 
 def get_typeable_term(string):
-    co = cohere.Client('a3q94Odywjq3jBIDEdFlvFDVXeDDhTTOJ9g56WY9')
+    co = cohere.Client('cohere apikey')
     prompt = f'''
     When I specify it, there will be a prompt, a user command to DYLAN, an ai system designed to type terms to aid those with accessibility needs. 
     You will need to remove references to DYLAN and any other details around the typed phrase, and leave only the typed phrase. 
